@@ -1,121 +1,120 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState, useEffect, useRef } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import Scene from './components/Scene';
+import { Intro, About, ProjectGrid, Archive, Contact } from './components/Content';
+import { HybridNav } from './components/HybridNav';
 
-function App() {
-  const [count, setCount] = useState(0)
+type LogEntry = { id: number; text: string; type: 'system' | 'user' | 'error' | 'success' };
+
+export default function App() {
+  const [view, setView] = useState('INTRO');
+  const prevViewRef = useRef('INTRO');
+  const [input, setInput] = useState('');
+  const [antigravity, setAntigravity] = useState(false);
+  const [log, setLog] = useState<LogEntry[]>([
+    { id: 1, text: 'AETHER.OS v2.0 initialized.', type: 'system' },
+    { id: 2, text: 'Type "help" to view available commands.', type: 'system' }
+  ]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const logIdCounter = useRef(3);
+
+  const handleSetView = (newView: string) => {
+    if (newView !== view) {
+      prevViewRef.current = view;
+      setView(newView);
+    }
+  };
+
+  // Keep focus on input when clicking anywhere on the background
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if ((e.target as HTMLElement).tagName !== 'INPUT') {
+        inputRef.current?.focus();
+      }
+    };
+    window.addEventListener('click', handleClick);
+    return () => window.removeEventListener('click', handleClick);
+  }, []);
+
+  const handleCommand = (cmd: string) => {
+    const c = cmd.toLowerCase().trim();
+    let response: LogEntry | null = null;
+
+    if (c === 'help') {
+      response = { id: logIdCounter.current++, text: 'Commands: access [module], contact, execute [protocol], clear. Modules: about, projects, archive, contact. Protocols: antigravity.', type: 'system' };
+    } else if (c.startsWith('access ')) {
+      const module = c.split(' ')[1];
+      if (['about', 'projects', 'archive', 'intro', 'contact'].includes(module)) {
+        handleSetView(module.toUpperCase());
+        response = { id: logIdCounter.current++, text: `Accessing module: ${module.toUpperCase()}...`, type: 'success' };
+      } else {
+        response = { id: logIdCounter.current++, text: `Error: Module '${module}' not found.`, type: 'error' };
+      }
+    } else if (c === 'contact') {
+      handleSetView('CONTACT');
+      response = { id: logIdCounter.current++, text: 'Establishing secure link... Accessing CONTACT module.', type: 'success' };
+    } else if (c === 'execute antigravity' || c === 'antigravity') {
+      setAntigravity(prev => !prev);
+      response = { id: logIdCounter.current++, text: `Protocol ANTIGRAVITY ${!antigravity ? 'engaged' : 'disabled'}.`, type: 'success' };
+    } else if (c === 'clear') {
+      setLog([]);
+      return;
+    } else {
+      response = { id: logIdCounter.current++, text: `Command not recognized: ${c}`, type: 'error' };
+    }
+
+    setLog(prev => {
+      const newLog = [...prev, { id: logIdCounter.current++, text: `> ${cmd}`, type: 'user' as const }];
+      if (response) newLog.push(response);
+      return newLog.slice(-6); // Keep only last 6 lines
+    });
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="relative min-h-screen bg-[#050014] text-white overflow-hidden font-sans selection:bg-[#8B5CF6] selection:text-white">
+      <Scene view={view} isAntigravity={antigravity} />
 
-      <div className="ticks"></div>
+      <main className="relative z-10 h-screen flex flex-col justify-between p-8 md:p-16 pointer-events-none">
+        {/* Header */}
+        <header className="flex justify-between items-center pointer-events-auto">
+          <motion.div 
+            drag={antigravity} 
+            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }} 
+            className={`text-[10px] tracking-[0.4em] uppercase font-medium flex flex-col gap-1 ${antigravity ? 'cursor-grab' : ''}`}
+          >
+            <div>Aether<span className="text-white/30">.OS</span></div>
+            <div className="text-white/30 text-[8px]">User: F.Okoth</div>
+          </motion.div>
+          <motion.div 
+            drag={antigravity} 
+            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }} 
+            className={`text-[10px] tracking-widest text-white/30 uppercase text-right ${antigravity ? 'cursor-grab' : ''}`}
+          >
+            Module: {view} <br/>
+            Gravity: {antigravity ? '0.0G' : '1.0G'}
+          </motion.div>
+        </header>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+        {/* Dynamic Content Area */}
+        <div className="flex-1 flex flex-col justify-center pointer-events-auto">
+          <AnimatePresence mode="wait">
+            {view === 'INTRO' && <Intro key="intro" antigravity={antigravity} />}
+            {view === 'ABOUT' && <About key="about" antigravity={antigravity} />}
+            {view === 'PROJECTS' && <ProjectGrid key="projects" antigravity={antigravity} />}
+            {view === 'ARCHIVE' && <Archive key="archive" antigravity={antigravity} />}
+            {view === 'CONTACT' && <Contact key="contact" antigravity={antigravity} onBack={() => handleSetView(prevViewRef.current)} />}
+          </AnimatePresence>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <HybridNav 
+          currentView={view} 
+          setView={handleSetView} 
+          log={log} 
+          handleCommand={handleCommand} 
+          input={input} 
+          setInput={setInput} 
+        />
+      </main>
+    </div>
+  );
 }
-
-export default App
