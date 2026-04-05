@@ -1,65 +1,24 @@
-# Dependencies
-node_modules/
-.pnp
-.pnp.js
-
-# Testing
-coverage/
-
-# Production / Build
-dist/
-build/
-
-# Environment Variables
-# (CRITICAL: Do not ignore .env.example)
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
 # Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Editor / System
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-
-# Vite / Build Cache
-.vite/
-dist-ssr/
+node_modules
+dist
+dist-ssr
 *.local
 
-# TypeScript
-*.tsbuildinfo
-
-# Secret Keys / SSL
-*.pem
-*.key
-auth.json
-
-# Deployment Configs
-.vercel/
-.netlify/
-.firebase/
-.terraform/
-serverless/
-
-# Large Media / Binary Artifacts
-*.flac
-*.wav
-*.mp4
-*.obj
-*.fbx
-*.gltf
-*.glb
-# (Only ignore 3D files if you plan to host them on a CDN instead of the repo)
-
-# Python / AI Research
-__pycache__/
-venv/
-.venv/
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
