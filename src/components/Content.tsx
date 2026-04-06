@@ -71,8 +71,8 @@ export function Intro({ antigravity }: { antigravity: boolean }) {
     <motion.div
       variants={container}
       initial="hidden"
-      animate="show"
-      exit="exit"
+      whileInView="show"
+      viewport={{ once: true, margin: "-100px" }}
       className={`max-w-3xl ${antigravity ? 'cursor-grab active:cursor-grabbing' : ''}`}
       drag={antigravity}
       dragConstraints={{ left: -500, right: 500, top: -300, bottom: 300 }}
@@ -80,13 +80,6 @@ export function Intro({ antigravity }: { antigravity: boolean }) {
       <motion.div
         animate={antigravity ? getFloatAnimation(true) : {}}
       >
-        <motion.div variants={item} className="flex items-center gap-3 mb-6">
-          <div className="w-2 h-2 rounded-full bg-[#A3E635] animate-pulse shadow-[0_0_10px_rgba(163,230,53,0.5)]" />
-          <div className="text-[10px] tracking-[0.4em] text-[#A3E635]/80 uppercase">
-            Root User Identified
-          </div>
-        </motion.div>
-        
         <motion.h1 variants={item} className="text-5xl md:text-7xl font-light tracking-tight mb-8 leading-[1.1]">
           Frankie <br />
           <span className="font-medium text-white/90">Okoth.</span>
@@ -101,21 +94,6 @@ export function Intro({ antigravity }: { antigravity: boolean }) {
               AI, Spatial Computing & Future Systems
             </p>
           </div>
-          
-          <div className="mt-6 flex items-center gap-4 text-[10px] tracking-widest uppercase text-white/30">
-            <span className="flex items-center gap-2">
-              SYS.STATUS: <span className="text-[#A3E635]">Optimal</span>
-            </span>
-            <span className="w-1 h-1 rounded-full bg-white/20" />
-            <span className="flex items-center">
-              Awaiting Command
-              <motion.span 
-                animate={{ opacity: [1, 0] }} 
-                transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }} 
-                className="inline-block w-2 h-3 bg-[#8B5CF6] ml-2" 
-              />
-            </span>
-          </div>
         </motion.div>
       </motion.div>
     </motion.div>
@@ -128,10 +106,10 @@ export function About({ antigravity }: { antigravity: boolean }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
-      animate={{ opacity: 1, y: 0, filter: 'blur(0px)', ...getFloatAnimation(antigravity, 1) }}
-      exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)', ...getFloatAnimation(antigravity, 1) }}
+      viewport={{ once: true, margin: "-100px" }}
       transition={transition}
-      className={`max-w-2xl w-full max-h-[65vh] overflow-y-auto pr-4 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#8B5CF6]/30 hover:[&::-webkit-scrollbar-thumb]:bg-[#8B5CF6]/50 text-white/80 font-light leading-relaxed ${antigravity ? 'cursor-grab active:cursor-grabbing' : ''}`}
+      className={`max-w-2xl w-full text-white/80 font-light leading-relaxed ${antigravity ? 'cursor-grab active:cursor-grabbing' : ''}`}
       drag={antigravity}
       dragConstraints={{ left: -500, right: 500, top: -300, bottom: 300 }}
     >
@@ -348,10 +326,10 @@ export function ProjectGrid({ antigravity }: { antigravity: boolean }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
-      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      viewport={{ once: true, margin: "-100px" }}
       transition={transition}
-      className="w-full max-w-5xl h-[65vh] flex flex-col"
+      className="w-full max-w-5xl flex flex-col"
     >
       <motion.h2 
         drag={antigravity}
@@ -363,7 +341,7 @@ export function ProjectGrid({ antigravity }: { antigravity: boolean }) {
       
       <div 
         ref={containerRef}
-        className="flex-1 overflow-y-auto pr-4 pb-12 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#8B5CF6]/30 hover:[&::-webkit-scrollbar-thumb]:bg-[#8B5CF6]/50"
+        className="flex-1 pb-12"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((p, i) => (
@@ -375,7 +353,7 @@ export function ProjectGrid({ antigravity }: { antigravity: boolean }) {
   );
 }
 
-export function Archive({ antigravity }: { antigravity: boolean }) {
+export function Skills({ antigravity }: { antigravity: boolean }) {
   const skills = [
     'Artificial Intelligence', 
     'Spatial Computing (VR/AR)', 
@@ -388,12 +366,12 @@ export function Archive({ antigravity }: { antigravity: boolean }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
-      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      viewport={{ once: true, margin: "-100px" }}
       transition={transition}
-      className="w-full max-w-2xl max-h-[65vh] overflow-y-auto pr-4 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#8B5CF6]/30 hover:[&::-webkit-scrollbar-thumb]:bg-[#8B5CF6]/50"
+      className="w-full max-w-2xl"
     >
-      <motion.h2 drag={antigravity} animate={getFloatAnimation(antigravity, 0.5)} className={`text-[10px] tracking-[0.4em] uppercase text-white/40 mb-12 ${antigravity ? 'cursor-grab' : ''}`}>System.Capabilities</motion.h2>
+      <motion.h2 drag={antigravity} animate={getFloatAnimation(antigravity, 0.5)} className={`text-[10px] tracking-[0.4em] uppercase text-white/40 mb-12 ${antigravity ? 'cursor-grab' : ''}`}>System.Skills</motion.h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12">
         {skills.map((skill, i) => (
           <motion.div
@@ -434,10 +412,10 @@ export function Contact({ antigravity, onBack }: { antigravity: boolean, onBack?
   return (
     <motion.div
       initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
-      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      viewport={{ once: true, margin: "-100px" }}
       transition={transition}
-      className="w-full max-w-5xl max-h-[65vh] overflow-y-auto pr-4 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#8B5CF6]/30 hover:[&::-webkit-scrollbar-thumb]:bg-[#8B5CF6]/50"
+      className="w-full max-w-5xl"
     >
       <motion.h2 
         drag={antigravity}

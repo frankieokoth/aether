@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import Scene from './components/Scene';
-import { Intro, About, ProjectGrid, Archive, Contact } from './components/Content';
+import { Intro, About, ProjectGrid, Skills, Contact } from './components/Content';
 import { HybridNav } from './components/HybridNav';
 
 type LogEntry = { id: number; text: string; type: 'system' | 'user' | 'error' | 'success' };
 
 export default function App() {
-  const [view, setView] = useState('INTRO');
-  const prevViewRef = useRef('INTRO');
+  const [view, setView] = useState('HOME');
+  const prevViewRef = useRef('HOME');
   const [input, setInput] = useState('');
   const [antigravity, setAntigravity] = useState(false);
   const [log, setLog] = useState<LogEntry[]>([
@@ -22,8 +22,33 @@ export default function App() {
     if (newView !== view) {
       prevViewRef.current = view;
       setView(newView);
+      const el = document.getElementById(newView.toLowerCase());
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setView(entry.target.id.toUpperCase());
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    const sections = ['home', 'about', 'work', 'stack', 'contact'];
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   // Keep focus on input when clicking anywhere on the background
   useEffect(() => {
@@ -41,10 +66,10 @@ export default function App() {
     let response: LogEntry | null = null;
 
     if (c === 'help') {
-      response = { id: logIdCounter.current++, text: 'Commands: access [module], contact, execute [protocol], clear. Modules: about, projects, archive, contact. Protocols: antigravity.', type: 'system' };
+      response = { id: logIdCounter.current++, text: 'Commands: access [module], contact, execute [protocol], clear. Modules: home, about, work, stack, contact. Protocols: antigravity.', type: 'system' };
     } else if (c.startsWith('access ')) {
       const module = c.split(' ')[1];
-      if (['about', 'projects', 'archive', 'intro', 'contact'].includes(module)) {
+      if (['home', 'about', 'work', 'stack', 'contact'].includes(module)) {
         handleSetView(module.toUpperCase());
         response = { id: logIdCounter.current++, text: `Accessing module: ${module.toUpperCase()}...`, type: 'success' };
       } else {
@@ -74,46 +99,46 @@ export default function App() {
     <div className="relative min-h-screen bg-[#050014] text-white overflow-hidden font-sans selection:bg-[#8B5CF6] selection:text-white">
       <Scene view={view} isAntigravity={antigravity} />
 
-      <main className="relative z-10 h-screen flex flex-col justify-between p-8 md:p-16 pointer-events-none">
-        {/* Header */}
-        <header className="flex justify-between items-center pointer-events-auto">
-          <motion.div 
-            drag={antigravity} 
-            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }} 
-            className={`text-[10px] tracking-[0.4em] uppercase font-medium flex flex-col gap-1 ${antigravity ? 'cursor-grab' : ''}`}
-          >
-            <div>Aether<span className="text-white/30">.OS</span></div>
-            <div className="text-white/30 text-[8px]">User: F.Okoth</div>
-          </motion.div>
-          <motion.div 
-            drag={antigravity} 
-            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }} 
-            className={`text-[10px] tracking-widest text-white/30 uppercase text-right ${antigravity ? 'cursor-grab' : ''}`}
-          >
-            Module: {view} <br/>
-            Gravity: {antigravity ? '0.0G' : '1.0G'}
-          </motion.div>
-        </header>
+      {/* Fixed Header */}
+      <header className="fixed top-8 left-8 md:top-16 md:left-16 z-50 pointer-events-auto">
+        <motion.div 
+          onClick={() => handleSetView('HOME')}
+          drag={antigravity} 
+          dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }} 
+          className={`text-[10px] tracking-[0.4em] uppercase font-medium flex flex-col gap-1 cursor-pointer hover:text-[#00FF41] transition-colors duration-300 ${antigravity ? 'active:cursor-grabbing' : ''}`}
+        >
+          <div className="text-xl tracking-[0.5em] font-light">A E T H E R</div>
+        </motion.div>
+      </header>
 
-        {/* Dynamic Content Area */}
-        <div className="flex-1 flex flex-col justify-center pointer-events-auto">
-          <AnimatePresence mode="wait">
-            {view === 'INTRO' && <Intro key="intro" antigravity={antigravity} />}
-            {view === 'ABOUT' && <About key="about" antigravity={antigravity} />}
-            {view === 'PROJECTS' && <ProjectGrid key="projects" antigravity={antigravity} />}
-            {view === 'ARCHIVE' && <Archive key="archive" antigravity={antigravity} />}
-            {view === 'CONTACT' && <Contact key="contact" antigravity={antigravity} onBack={() => handleSetView(prevViewRef.current)} />}
-          </AnimatePresence>
+      <HybridNav 
+        currentView={view} 
+        setView={handleSetView} 
+        log={log} 
+        handleCommand={handleCommand} 
+        input={input} 
+        setInput={setInput} 
+      />
+
+      {/* Scrollable Content Area */}
+      <main className="relative z-10 h-screen overflow-y-auto overflow-x-hidden scroll-smooth pointer-events-auto" id="main-scroll-container">
+        <div className="px-8 md:px-16 pb-32">
+          <div id="home" className="min-h-screen flex flex-col justify-center pt-20">
+            <Intro antigravity={antigravity} />
+          </div>
+          <div id="about" className="min-h-screen flex flex-col justify-center pt-20">
+            <About antigravity={antigravity} />
+          </div>
+          <div id="work" className="min-h-screen flex flex-col justify-center pt-20">
+            <ProjectGrid antigravity={antigravity} />
+          </div>
+          <div id="stack" className="min-h-screen flex flex-col justify-center pt-20">
+            <Skills antigravity={antigravity} />
+          </div>
+          <div id="contact" className="min-h-screen flex flex-col justify-center pt-20">
+            <Contact antigravity={antigravity} onBack={() => handleSetView(prevViewRef.current)} />
+          </div>
         </div>
-
-        <HybridNav 
-          currentView={view} 
-          setView={handleSetView} 
-          log={log} 
-          handleCommand={handleCommand} 
-          input={input} 
-          setInput={setInput} 
-        />
       </main>
     </div>
   );

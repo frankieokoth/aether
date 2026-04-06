@@ -38,15 +38,16 @@ export function HybridNav({ currentView, setView, log, handleCommand, input, set
 
   const navItems = [
     { id: 'ABOUT', label: '// 01. ABOUT' },
-    { id: 'PROJECTS', label: '// 02. PROJECTS' },
-    { id: 'ARCHIVE', label: '// 03. ARCHIVE' },
+    { id: 'WORK', label: '// 02. WORK' },
+    { id: 'STACK', label: '// 03. STACK' },
+    { id: 'CONTACT', label: '// 04. CONTACT' },
   ];
 
   return (
     <>
       {/* Minimalist Navbar */}
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 pointer-events-auto">
-        <nav className="flex items-center gap-8 px-8 py-4 bg-black/40 backdrop-blur-md border border-white/10 rounded-sm">
+      <div className="fixed top-8 right-8 z-40 pointer-events-auto">
+        <nav className="flex items-center gap-4 md:gap-8 py-4">
           {navItems.map((item) => {
             const isActive = currentView === item.id;
             return (
