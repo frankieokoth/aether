@@ -73,7 +73,7 @@ export function Intro({ antigravity }: { antigravity: boolean }) {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: "-100px" }}
-      className={`max-w-3xl ${antigravity ? 'cursor-grab active:cursor-grabbing' : ''}`}
+      className={`w-full max-w-5xl mx-auto px-8 md:px-12 ${antigravity ? 'cursor-grab active:cursor-grabbing' : ''}`}
       drag={antigravity}
       dragConstraints={{ left: -500, right: 500, top: -300, bottom: 300 }}
     >
@@ -109,7 +109,7 @@ export function About({ antigravity }: { antigravity: boolean }) {
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)', ...getFloatAnimation(antigravity, 1) }}
       viewport={{ once: true, margin: "-100px" }}
       transition={transition}
-      className={`max-w-2xl w-full text-white/80 font-light leading-relaxed ${antigravity ? 'cursor-grab active:cursor-grabbing' : ''}`}
+      className={`w-full max-w-5xl mx-auto px-8 md:px-12 text-white/80 font-light leading-loose ${antigravity ? 'cursor-grab active:cursor-grabbing' : ''}`}
       drag={antigravity}
       dragConstraints={{ left: -500, right: 500, top: -300, bottom: 300 }}
     >
@@ -118,7 +118,7 @@ export function About({ antigravity }: { antigravity: boolean }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-10px" }}
         transition={transitionProps}
-        className="text-[10px] tracking-[0.4em] uppercase text-white/40 mb-8"
+        className="text-[10px] tracking-[0.4em] uppercase text-white/40 mb-16"
       >
         System.Identity
       </motion.h2>
@@ -127,7 +127,7 @@ export function About({ antigravity }: { antigravity: boolean }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-10px" }}
         transition={transitionProps}
-        className="text-2xl md:text-4xl mb-8 text-white tracking-tight leading-tight"
+        className="text-2xl md:text-4xl mb-16 text-white tracking-tight leading-tight"
       >
         I engineer intelligent systems and immersive realities.
       </motion.p>
@@ -136,7 +136,7 @@ export function About({ antigravity }: { antigravity: boolean }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-10px" }}
         transition={transitionProps}
-        className="text-sm md:text-base mb-6 text-white/50 tracking-wide"
+        className="text-sm md:text-base mb-6 text-white/50 tracking-wide leading-loose"
       >
         I’m a software engineer focused on building well-structured, reliable systems. My work primarily centers on backend development, where I design scalable services, develop clean APIs, and implement systems that emphasize clarity, maintainability, and long-term performance.
       </motion.p>
@@ -329,12 +329,12 @@ export function ProjectGrid({ antigravity }: { antigravity: boolean }) {
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       viewport={{ once: true, margin: "-100px" }}
       transition={transition}
-      className="w-full max-w-5xl flex flex-col"
+      className="w-full max-w-5xl mx-auto px-8 md:px-12 flex flex-col"
     >
       <motion.h2 
         drag={antigravity}
         animate={getFloatAnimation(antigravity, 0.5)}
-        className={`text-[10px] tracking-[0.4em] uppercase text-white/40 mb-8 shrink-0 ${antigravity ? 'cursor-grab' : ''}`}
+        className={`text-[10px] tracking-[0.4em] uppercase text-white/40 mb-16 shrink-0 ${antigravity ? 'cursor-grab' : ''}`}
       >
         System.Projects
       </motion.h2>
@@ -369,10 +369,10 @@ export function Skills({ antigravity }: { antigravity: boolean }) {
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       viewport={{ once: true, margin: "-100px" }}
       transition={transition}
-      className="w-full max-w-2xl"
+      className="w-full max-w-5xl mx-auto px-8 md:px-12"
     >
-      <motion.h2 drag={antigravity} animate={getFloatAnimation(antigravity, 0.5)} className={`text-[10px] tracking-[0.4em] uppercase text-white/40 mb-12 ${antigravity ? 'cursor-grab' : ''}`}>System.Skills</motion.h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12">
+      <motion.h2 drag={antigravity} animate={getFloatAnimation(antigravity, 0.5)} className={`text-[10px] tracking-[0.4em] uppercase text-white/40 mb-16 ${antigravity ? 'cursor-grab' : ''}`}>System.Skills</motion.h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-y-12 gap-x-16">
         {skills.map((skill, i) => (
           <motion.div
             key={skill}
@@ -384,7 +384,7 @@ export function Skills({ antigravity }: { antigravity: boolean }) {
             className={`flex items-center gap-6 group ${antigravity ? 'cursor-grab active:cursor-grabbing bg-[#050014] p-2 rounded' : ''}`}
           >
             <div className="w-1 h-1 bg-[#8B5CF6]/40 rounded-full group-hover:bg-[#A3E635] group-hover:scale-150 transition-all duration-300" />
-            <span className="text-sm md:text-base font-light tracking-wide text-white/60 group-hover:text-white transition-colors duration-300">
+            <span className="text-sm md:text-base font-light tracking-wide text-white/60 group-hover:text-white transition-colors duration-300 leading-loose">
               {skill}
             </span>
           </motion.div>
@@ -415,12 +415,12 @@ export function Contact({ antigravity, onBack }: { antigravity: boolean, onBack?
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       viewport={{ once: true, margin: "-100px" }}
       transition={transition}
-      className="w-full max-w-5xl"
+      className="w-full max-w-5xl mx-auto px-8 md:px-12"
     >
       <motion.h2 
         drag={antigravity}
         animate={getFloatAnimation(antigravity, 0.5)}
-        className={`text-[10px] tracking-[0.4em] uppercase text-white/40 mb-12 ${antigravity ? 'cursor-grab' : ''}`}
+        className={`text-[10px] tracking-[0.4em] uppercase text-white/40 mb-16 ${antigravity ? 'cursor-grab' : ''}`}
       >
         System.Contact
       </motion.h2>

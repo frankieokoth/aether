@@ -15,8 +15,21 @@ export default function App() {
     { id: 1, text: 'AETHER.OS v2.0 initialized.', type: 'system' },
     { id: 2, text: 'Type "help" to view available commands.', type: 'system' }
   ]);
+  const [isScrolled, setIsScrolled] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const logIdCounter = useRef(3);
+
+  useEffect(() => {
+    const scrollContainer = document.getElementById('main-scroll-container');
+    if (!scrollContainer) return;
+
+    const handleScroll = () => {
+      setIsScrolled(scrollContainer.scrollTop > 50);
+    };
+
+    scrollContainer.addEventListener('scroll', handleScroll);
+    return () => scrollContainer.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleSetView = (newView: string) => {
     if (newView !== view) {
@@ -100,44 +113,53 @@ export default function App() {
       <Scene view={view} isAntigravity={antigravity} />
 
       {/* Fixed Header */}
-      <header className="fixed top-8 left-8 md:top-16 md:left-16 z-50 pointer-events-auto">
-        <motion.div 
-          onClick={() => handleSetView('HOME')}
-          drag={antigravity} 
-          dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }} 
-          className={`text-[10px] tracking-[0.4em] uppercase font-medium flex flex-col gap-1 cursor-pointer hover:text-[#00FF41] transition-colors duration-300 ${antigravity ? 'active:cursor-grabbing' : ''}`}
-        >
-          <div className="text-xl tracking-[0.5em] font-light">A E T H E R</div>
-        </motion.div>
+      <header className={`fixed top-0 left-0 w-full z-50 pointer-events-auto transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-[#050014]/70 backdrop-blur-md border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]' 
+          : 'bg-transparent border-transparent'
+      }`}>
+        {/* Subtle tactical glowing edge */}
+        <div className={`absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00FF41]/20 to-transparent transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`} />
+        
+        <div className="max-w-7xl mx-auto px-8 md:px-16 h-20 flex items-center justify-between">
+          <motion.div 
+            onClick={() => handleSetView('HOME')}
+            drag={antigravity} 
+            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }} 
+            className={`text-[10px] tracking-[0.4em] uppercase font-medium flex flex-col gap-1 cursor-pointer hover:text-[#00FF41] transition-colors duration-300 ${antigravity ? 'active:cursor-grabbing' : ''}`}
+          >
+            <div className="text-xl tracking-[0.5em] font-light">A E T H E R</div>
+          </motion.div>
+
+          <HybridNav 
+            currentView={view} 
+            setView={handleSetView} 
+            log={log} 
+            handleCommand={handleCommand} 
+            input={input} 
+            setInput={setInput} 
+          />
+        </div>
       </header>
 
-      <HybridNav 
-        currentView={view} 
-        setView={handleSetView} 
-        log={log} 
-        handleCommand={handleCommand} 
-        input={input} 
-        setInput={setInput} 
-      />
-
       {/* Scrollable Content Area */}
-      <main className="relative z-10 h-screen overflow-y-auto overflow-x-hidden scroll-smooth pointer-events-auto" id="main-scroll-container">
-        <div className="px-8 md:px-16 pb-32">
-          <div id="home" className="min-h-screen flex flex-col justify-center pt-20">
+      <main className="relative z-10 h-screen overflow-y-auto overflow-x-hidden scroll-smooth pointer-events-auto pt-20" id="main-scroll-container">
+        <div className="pb-32">
+          <section id="home" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
             <Intro antigravity={antigravity} />
-          </div>
-          <div id="about" className="min-h-screen flex flex-col justify-center pt-20">
+          </section>
+          <section id="about" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
             <About antigravity={antigravity} />
-          </div>
-          <div id="work" className="min-h-screen flex flex-col justify-center pt-20">
+          </section>
+          <section id="work" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
             <ProjectGrid antigravity={antigravity} />
-          </div>
-          <div id="stack" className="min-h-screen flex flex-col justify-center pt-20">
+          </section>
+          <section id="stack" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
             <Skills antigravity={antigravity} />
-          </div>
-          <div id="contact" className="min-h-screen flex flex-col justify-center pt-20">
+          </section>
+          <section id="contact" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
             <Contact antigravity={antigravity} onBack={() => handleSetView(prevViewRef.current)} />
-          </div>
+          </section>
         </div>
       </main>
     </div>

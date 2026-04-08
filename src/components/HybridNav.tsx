@@ -46,32 +46,30 @@ export function HybridNav({ currentView, setView, log, handleCommand, input, set
   return (
     <>
       {/* Minimalist Navbar */}
-      <div className="fixed top-8 right-8 z-40 pointer-events-auto">
-        <nav className="flex items-center gap-4 md:gap-8 py-4">
-          {navItems.map((item) => {
-            const isActive = currentView === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => setView(item.id)}
-                className={`relative font-mono text-xs tracking-widest uppercase transition-all duration-300 group py-1 ${isActive ? 'text-[#00FF41] font-bold' : 'text-white/70 hover:text-white'}`}
-              >
-                <span className={`absolute -left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[#00FF41] ${isActive ? 'opacity-100' : ''}`}>[</span>
-                {item.label}
-                <span className={`absolute -right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[#00FF41] ${isActive ? 'opacity-100' : ''}`}>]</span>
-                {isActive && (
-                  <motion.div
-                    layoutId="activeNavIndicator"
-                    className="absolute -bottom-1 left-0 right-0 h-[1px] bg-[#00FF41] shadow-[0_0_8px_rgba(0,255,65,0.8)]"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-              </button>
-            );
-          })}
-        </nav>
-      </div>
+      <nav className="flex items-center gap-4 md:gap-8">
+        {navItems.map((item) => {
+          const isActive = currentView === item.id;
+          return (
+            <button
+              key={item.id}
+              onClick={() => setView(item.id)}
+              className={`relative font-mono text-xs tracking-widest uppercase transition-all duration-300 group py-1 ${isActive ? 'text-[#00FF41] font-bold' : 'text-white/70 hover:text-white'}`}
+            >
+              <span className={`absolute -left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[#00FF41] ${isActive ? 'opacity-100' : ''}`}>[</span>
+              {item.label}
+              <span className={`absolute -right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[#00FF41] ${isActive ? 'opacity-100' : ''}`}>]</span>
+              {isActive && (
+                <motion.div
+                  layoutId="activeNavIndicator"
+                  className="absolute -bottom-1 left-0 right-0 h-[1px] bg-[#00FF41] shadow-[0_0_8px_rgba(0,255,65,0.8)]"
+                  initial={false}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
+            </button>
+          );
+        })}
+      </nav>
 
       {/* Hidden Terminal */}
       <AnimatePresence>
@@ -145,4 +143,3 @@ export function HybridNav({ currentView, setView, log, handleCommand, input, set
     </>
   );
 }
-
