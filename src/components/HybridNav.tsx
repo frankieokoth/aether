@@ -91,8 +91,8 @@ export function HybridNav({ currentView, setView, log, handleCommand, input, set
             />
             
             {/* Terminal Window */}
-            <div className="relative w-full h-[50vh] bg-[#050505] border-t border-[#00FF41]/30 p-6 md:p-12 flex flex-col font-mono text-[#00FF41] shadow-[0_-10px_40px_rgba(0,255,65,0.05)] rounded-t-sm">
-              <div className="flex justify-between items-center mb-6 border-b border-[#00FF41]/20 pb-4">
+            <div className="relative w-full h-[50vh] bg-[#050014]/60 backdrop-blur-2xl border-t border-white/10 p-6 md:p-12 flex flex-col font-mono text-[#00FF41] shadow-[0_-10px_40px_rgba(0,0,0,0.5)] rounded-t-sm">
+              <div className="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
                 <span className="text-xs tracking-widest opacity-70">TERMINAL // PRESS ` TO CLOSE</span>
                 <button onClick={() => setIsTerminalOpen(false)} className="text-xs hover:text-white transition-colors tracking-widest">[ CLOSE ]</button>
               </div>
