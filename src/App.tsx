@@ -11,6 +11,7 @@ export default function App() {
   const prevViewRef = useRef('HOME');
   const [input, setInput] = useState('');
   const [antigravity, setAntigravity] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [log, setLog] = useState<LogEntry[]>([
     { id: 1, text: 'AETHER.OS v2.0 initialized.', type: 'system' },
     { id: 2, text: 'Type "help" to view available commands.', type: 'system' }
@@ -48,6 +49,17 @@ export default function App() {
     });
 
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Keep focus on input when clicking anywhere on the background
