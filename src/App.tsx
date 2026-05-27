@@ -1,34 +1,37 @@
-import { useState, useEffect, useRef } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
-import Scene from './components/Scene';
-import { Intro, About, ProjectGrid, Skills, Contact } from './components/Content';
-import { HybridNav } from './components/HybridNav';
+import { useEffect, Suspense, lazy, useRef } from 'react';
+import { motion, useScroll } from 'motion/react';
+import { useAetherStore } from './store/aether-store';
 
-type LogEntry = { id: number; text: string; type: 'system' | 'user' | 'error' | 'success' };
+import { Navbar } from './components/Navbar';
+import { Intro } from './components/sections/Intro';
+
+const Scene = lazy(() => import('./components/Scene'));
+const About = lazy(() => import('./components/sections/About').then(m => ({ default: m.About })));
+const ProjectGrid = lazy(() => import('./components/sections/ProjectGrid').then(m => ({ default: m.ProjectGrid })));
+const Skills = lazy(() => import('./components/sections/Skills').then(m => ({ default: m.Skills })));
+const Contact = lazy(() => import('./components/sections/Contact').then(m => ({ default: m.Contact })));
 
 export default function App() {
-  const [view, setView] = useState('HOME');
-  const prevViewRef = useRef('HOME');
-  const [input, setInput] = useState('');
-  const [antigravity, setAntigravity] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [log, setLog] = useState<LogEntry[]>([
-    { id: 1, text: 'AETHER.OS v2.0 initialized.', type: 'system' },
-    { id: 2, text: 'Type "help" to view available commands.', type: 'system' }
-  ]);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const logIdCounter = useRef(3);
+  const view = useAetherStore((s) => s.view);
+  const setView = useAetherStore((s) => s.setView);
+  const isScrolled = useAetherStore((s) => s.isScrolled);
+  const setIsScrolled = useAetherStore((s) => s.setIsScrolled);
+  const prevView = useAetherStore((s) => s.prevView);
 
-  const handleSetView = (newView: string) => {
-    if (newView !== view) {
-      prevViewRef.current = view;
-      setView(newView);
-      const el = document.getElementById(newView.toLowerCase());
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  };
+  const mainScrollContainerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ container: mainScrollContainerRef });
+
+  useEffect(() => {
+    const container = mainScrollContainerRef.current;
+    if (!container) return;
+    
+    const handleScroll = () => {
+      setIsScrolled(container.scrollTop > 50);
+    };
+    
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [setIsScrolled]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -49,116 +52,70 @@ export default function App() {
     });
 
     return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Keep focus on input when clicking anywhere on the background
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if ((e.target as HTMLElement).tagName !== 'INPUT') {
-        inputRef.current?.focus();
-      }
-    };
-    window.addEventListener('click', handleClick);
-    return () => window.removeEventListener('click', handleClick);
-  }, []);
-
-  const handleCommand = (cmd: string) => {
-    const c = cmd.toLowerCase().trim();
-    let response: LogEntry | null = null;
-
-    if (c === 'help') {
-      response = { id: logIdCounter.current++, text: 'Commands: access [module], contact, execute [protocol], clear. Modules: home, about, work, stack, contact. Protocols: antigravity.', type: 'system' };
-    } else if (c.startsWith('access ')) {
-      const module = c.split(' ')[1];
-      if (['home', 'about', 'work', 'stack', 'contact'].includes(module)) {
-        handleSetView(module.toUpperCase());
-        response = { id: logIdCounter.current++, text: `Accessing module: ${module.toUpperCase()}...`, type: 'success' };
-      } else {
-        response = { id: logIdCounter.current++, text: `Error: Module '${module}' not found.`, type: 'error' };
-      }
-    } else if (c === 'contact') {
-      handleSetView('CONTACT');
-      response = { id: logIdCounter.current++, text: 'Establishing secure link... Accessing CONTACT module.', type: 'success' };
-    } else if (c === 'execute antigravity' || c === 'antigravity') {
-      setAntigravity(prev => !prev);
-      response = { id: logIdCounter.current++, text: `Protocol ANTIGRAVITY ${!antigravity ? 'engaged' : 'disabled'}.`, type: 'success' };
-    } else if (c === 'clear') {
-      setLog([]);
-      return;
-    } else {
-      response = { id: logIdCounter.current++, text: `Command not recognized: ${c}`, type: 'error' };
-    }
-
-    setLog(prev => {
-      const newLog = [...prev, { id: logIdCounter.current++, text: `> ${cmd}`, type: 'user' as const }];
-      if (response) newLog.push(response);
-      return newLog.slice(-6); // Keep only last 6 lines
-    });
-  };
+  }, [setView]);
 
   return (
     <div className="relative min-h-screen bg-[#050014] text-white overflow-hidden font-sans selection:bg-[#8B5CF6] selection:text-white">
-      <Scene view={view} isAntigravity={antigravity} />
+      
+      <Suspense fallback={<div className="fixed inset-0 bg-[#050014] z-0" />}>
+        <Scene />
+      </Suspense>
 
-      {/* Fixed Header */}
+      <a href="#main-scroll-container" 
+         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#8B5CF6] focus:text-white">
+          Skip to content
+      </a>
+
       <header className={`fixed top-0 left-0 w-full z-50 pointer-events-auto transition-all duration-300 ${
         isScrolled 
           ? 'bg-[#050014]/40 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]' 
           : 'bg-transparent border-transparent'
       }`}>
-        {/* Subtle tactical glowing edge */}
         <div className={`absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00FF41]/20 to-transparent transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`} />
         
+        <motion.div
+          style={{ scaleX: scrollYProgress }}
+          className="absolute top-0 left-0 right-0 h-[2px] bg-[#00FF41] origin-left z-[60]"
+        />
+        
         <div className="max-w-7xl mx-auto px-8 md:px-16 h-20 flex items-center justify-between">
-          <motion.div 
-            onClick={() => handleSetView('HOME')}
-            drag={antigravity} 
-            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }} 
-            className={`font-mono text-xs tracking-widest uppercase cursor-pointer transition-colors duration-300 ${view === 'HOME' ? 'text-[#00FF41] font-bold' : 'text-white/70 hover:text-white'} ${antigravity ? 'active:cursor-grabbing' : ''}`}
+          <button 
+            onClick={() => {
+              setView('HOME');
+              document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className={`font-mono text-xs tracking-widest uppercase transition-colors duration-300 ${view === 'HOME' ? 'text-[#00FF41] font-bold' : 'text-white/70 hover:text-white'}`}
           >
             // 00. HOME
-          </motion.div>
+          </button>
 
-          <HybridNav 
-            currentView={view} 
-            setView={handleSetView} 
-            log={log} 
-            handleCommand={handleCommand} 
-            input={input} 
-            setInput={setInput} 
-          />
+          <Navbar />
         </div>
       </header>
 
-      {/* Scrollable Content Area */}
-      <main className="relative z-10 h-screen overflow-y-auto overflow-x-hidden scroll-smooth pointer-events-auto pt-20" id="main-scroll-container">
+      <main ref={mainScrollContainerRef} className="relative z-10 h-screen overflow-y-auto overflow-x-hidden scroll-smooth pointer-events-auto pt-20" id="main-scroll-container">
         <div className="pb-32">
           <section id="home" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
-            <Intro antigravity={antigravity} />
+            <Intro />
           </section>
-          <section id="about" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
-            <About antigravity={antigravity} />
-          </section>
-          <section id="work" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
-            <ProjectGrid antigravity={antigravity} />
-          </section>
-          <section id="stack" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
-            <Skills antigravity={antigravity} />
-          </section>
-          <section id="contact" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
-            <Contact antigravity={antigravity} onBack={() => handleSetView(prevViewRef.current)} />
-          </section>
+          
+          <Suspense fallback={null}>
+            <section id="about" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
+              <About />
+            </section>
+            <section id="work" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
+              <ProjectGrid />
+            </section>
+            <section id="stack" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
+              <Skills />
+            </section>
+            <section id="contact" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
+              <Contact onBack={() => {
+                setView(prevView);
+                document.getElementById(prevView.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+              }} />
+            </section>
+          </Suspense>
         </div>
       </main>
     </div>

@@ -14,14 +14,37 @@
   }
 }
 
-@layer base {
-  body {
-    @apply bg-[#F8F9FA] text-[#050014] dark:bg-[#020202] dark:text-white font-sans overflow-hidden;
-  }
+body {
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: none;
+  background-color: #050014;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;
+}
+
+/* Mechanical Sympathy & Accessibility */
+section {
+  contain: content;
+}
+
+.scene-wrapper {
+  contain: strict;
+}
+
+:focus-visible {
+  outline: 2px solid #A3E635;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

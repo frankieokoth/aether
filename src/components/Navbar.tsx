@@ -1,69 +1,44 @@
 import { motion } from 'motion/react';
-import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useAetherStore } from '../store/aether-store';
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+export function Navbar() {
+  const view = useAetherStore((s) => s.view);
+  const setView = useAetherStore((s) => s.setView);
 
-  const menuItems = [
-    { name: 'WORK', href: '#work' },
-    { name: 'ABOUT', href: '#about' },
-    { name: 'CONTACT', href: '#contact' },
+  const navItems = [
+    { id: 'ABOUT', label: '// 01. ABOUT' },
+    { id: 'WORK', label: '// 02. WORK' },
+    { id: 'STACK', label: '// 03. STACK' },
+    { id: 'CONTACT', label: '// 04. CONTACT' },
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 px-8 py-8 flex justify-between items-center mix-blend-difference">
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        className="text-xl font-display font-bold tracking-tighter"
-      >
-        AETHER.
-      </motion.div>
-
-      <div className="hidden md:flex gap-12">
-        {menuItems.map((item, i) => (
-          <motion.a
-            key={item.name}
-            href={item.href}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            className="text-xs font-display tracking-[0.2em] hover:text-accent transition-colors"
+    <nav className="flex items-center gap-4 md:gap-8">
+      {navItems.map((item) => {
+        const isActive = view === item.id;
+        return (
+          <button
+            key={item.id}
+            onClick={() => {
+              setView(item.id);
+              document.getElementById(item.id.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className={`relative font-mono text-xs tracking-widest uppercase transition-all duration-300 group py-1 ${isActive ? 'text-[#00FF41] font-bold' : 'text-white/70 hover:text-white'}`}
           >
-            {item.name}
-          </motion.a>
-        ))}
-      </div>
-
-      <motion.button
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden text-white"
-      >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
-      </motion.button>
-
-      {/* Mobile Menu Overlay */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute top-full left-0 w-full bg-bg/95 backdrop-blur-xl p-8 flex flex-col gap-6 md:hidden"
-        >
-          {menuItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              onClick={() => setIsOpen(false)}
-              className="text-2xl font-display font-bold tracking-tighter hover:text-accent"
-            >
-              {item.name}
-            </a>
-          ))}
-        </motion.div>
-      )}
+            <span className={`absolute -left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[#00FF41] ${isActive ? 'opacity-100' : ''}`}>[</span>
+            {item.label}
+            <span className={`absolute -right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[#00FF41] ${isActive ? 'opacity-100' : ''}`}>]</span>
+            {isActive && (
+              <motion.div
+                layoutId="activeNavIndicator"
+                className="absolute -bottom-1 left-0 right-0 h-[1px] bg-[#00FF41] shadow-[0_0_8px_rgba(0,255,65,0.8)]"
+                initial={false}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+            )}
+          </button>
+        );
+      })}
     </nav>
   );
 }
