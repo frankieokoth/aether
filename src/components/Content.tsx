@@ -136,7 +136,7 @@ export function About({ antigravity }: { antigravity: boolean }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-10px" }}
         transition={transitionProps}
-        className="text-sm md:text-base mb-6 text-white/50 tracking-wide leading-loose"
+        className="text-sm md:text-base mb-6 text-white/50 tracking-wide"
       >
         I’m a software engineer focused on building well-structured, reliable systems. My work primarily centers on backend development, where I design scalable services, develop clean APIs, and implement systems that emphasize clarity, maintainability, and long-term performance.
       </motion.p>
@@ -215,7 +215,7 @@ function ProjectCard({ p, i, antigravity, containerRef }: { p: any, i: number, a
         stiffness: 100, 
         damping: 20 
       }}
-      className={`relative h-[400px] rounded-sm overflow-hidden group border border-[#8B5CF6]/20 hover:border-[#8B5CF6]/50 hover:scale-[1.02] transition-all duration-500 ease-out bg-[#050014] ${antigravity ? 'cursor-grab active:cursor-grabbing' : ''}`}
+      className={`relative h-[400px] rounded-sm overflow-hidden group border border-white/10 hover:border-[#8B5CF6]/50 hover:scale-[1.02] transition-all duration-500 ease-out bg-[#050014]/40 backdrop-blur-md shadow-lg ${antigravity ? 'cursor-grab active:cursor-grabbing' : ''}`}
     >
       {/* Parallax Background */}
       <motion.div 
@@ -381,7 +381,7 @@ export function Skills({ antigravity }: { antigravity: boolean }) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0, ...getFloatAnimation(antigravity, i * 0.5) }}
             transition={{ ...transition, delay: i * 0.1 }}
-            className={`flex items-center gap-6 group ${antigravity ? 'cursor-grab active:cursor-grabbing bg-[#050014] p-2 rounded' : ''}`}
+            className={`flex items-center gap-6 group p-4 rounded bg-white/[0.02] backdrop-blur-md border border-white/5 hover:border-white/10 hover:bg-white/[0.04] transition-all ${antigravity ? 'cursor-grab active:cursor-grabbing' : ''}`}
           >
             <div className="w-1 h-1 bg-[#8B5CF6]/40 rounded-full group-hover:bg-[#A3E635] group-hover:scale-150 transition-all duration-300" />
             <span className="text-sm md:text-base font-light tracking-wide text-white/60 group-hover:text-white transition-colors duration-300 leading-loose">
@@ -453,57 +453,57 @@ export function Contact({ antigravity, onBack }: { antigravity: boolean, onBack?
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-              <motion.div drag={antigravity} dragConstraints={{ left: -500, right: 500, top: -300, bottom: 300 }} className="flex flex-col gap-2 relative group">
+              <motion.div drag={antigravity} dragConstraints={{ left: -500, right: 500, top: -300, bottom: 300 }} className="flex flex-col gap-2 relative group p-4 rounded bg-white/[0.02] backdrop-blur-md border border-white/5 hover:border-white/10 transition-all">
                 <label className="text-[10px] tracking-widest uppercase text-white/40 flex justify-between">
                   <span>Identity_</span>
                   <span className="text-[#8B5CF6] opacity-0 group-focus-within:opacity-100 transition-opacity">Required</span>
                 </label>
-                <div className="relative">
+                <div className="relative mt-2">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8B5CF6]/50 font-mono group-focus-within:text-[#A3E635] group-focus-within:translate-x-1 transition-all duration-300">{'>'}</span>
                   <input 
                     required 
                     type="text" 
                     onFocus={() => setActiveField('IDENTITY')}
                     onBlur={() => setActiveField('NONE')}
-                    className="w-full bg-white/[0.02] border border-white/10 py-4 pl-10 pr-4 outline-none text-white focus:border-[#A3E635] focus:ring-1 focus:ring-[#A3E635]/50 focus:bg-[#A3E635]/5 transition-all duration-300 rounded-sm font-light placeholder-white/10" 
+                    className="w-full bg-transparent border-b border-white/10 py-2 pl-10 pr-4 outline-none text-white focus:border-[#A3E635] transition-all duration-300 rounded-none font-light placeholder-white/20" 
                     placeholder="Enter your designation" 
                   />
                 </div>
               </motion.div>
 
-              <motion.div drag={antigravity} dragConstraints={{ left: -500, right: 500, top: -300, bottom: 300 }} className="flex flex-col gap-2 relative group">
+              <motion.div drag={antigravity} dragConstraints={{ left: -500, right: 500, top: -300, bottom: 300 }} className="flex flex-col gap-2 relative group p-4 rounded bg-white/[0.02] backdrop-blur-md border border-white/5 hover:border-white/10 transition-all">
                 <label className="text-[10px] tracking-widest uppercase text-white/40 flex justify-between">
                   <span>Signal_</span>
                   <span className="text-[#8B5CF6] opacity-0 group-focus-within:opacity-100 transition-opacity">Required</span>
                 </label>
-                <div className="relative">
+                <div className="relative mt-2">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8B5CF6]/50 font-mono group-focus-within:text-[#A3E635] group-focus-within:translate-x-1 transition-all duration-300">{'>'}</span>
                   <input 
                     required 
                     type="email" 
                     onFocus={() => setActiveField('SIGNAL')}
                     onBlur={() => setActiveField('NONE')}
-                    className="w-full bg-white/[0.02] border border-white/10 py-4 pl-10 pr-4 outline-none text-white focus:border-[#A3E635] focus:ring-1 focus:ring-[#A3E635]/50 focus:bg-[#A3E635]/5 transition-all duration-300 rounded-sm font-light placeholder-white/10" 
+                    className="w-full bg-transparent border-b border-white/10 py-2 pl-10 pr-4 outline-none text-white focus:border-[#A3E635] transition-all duration-300 rounded-none font-light placeholder-white/20" 
                     placeholder="Enter your return address" 
                   />
                 </div>
               </motion.div>
 
-              <motion.div drag={antigravity} dragConstraints={{ left: -500, right: 500, top: -300, bottom: 300 }} className="flex flex-col gap-2 relative group">
+              <motion.div drag={antigravity} dragConstraints={{ left: -500, right: 500, top: -300, bottom: 300 }} className="flex flex-col gap-2 relative group p-4 rounded bg-white/[0.02] backdrop-blur-md border border-white/5 hover:border-white/10 transition-all">
                 <label className="text-[10px] tracking-widest uppercase text-white/40 flex justify-between">
                   <span>Payload_</span>
                   <span className="text-[#8B5CF6] opacity-0 group-focus-within:opacity-100 transition-opacity">{payload.length} BYTES</span>
                 </label>
-                <div className="relative">
-                  <span className="absolute left-4 top-4 text-[#8B5CF6]/50 font-mono group-focus-within:text-[#A3E635] group-focus-within:translate-x-1 transition-all duration-300">{'>'}</span>
+                <div className="relative mt-2">
+                  <span className="absolute left-4 top-2 text-[#8B5CF6]/50 font-mono group-focus-within:text-[#A3E635] group-focus-within:translate-x-1 transition-all duration-300">{'>'}</span>
                   <textarea 
                     required 
-                    rows={5} 
+                    rows={4} 
                     value={payload}
                     onChange={(e) => setPayload(e.target.value)}
                     onFocus={() => setActiveField('PAYLOAD')}
                     onBlur={() => setActiveField('NONE')}
-                    className="w-full bg-white/[0.02] border border-white/10 py-4 pl-10 pr-4 outline-none text-white focus:border-[#A3E635] focus:ring-1 focus:ring-[#A3E635]/50 focus:bg-[#A3E635]/5 transition-all duration-300 resize-none rounded-sm font-light placeholder-white/10" 
+                    className="w-full bg-transparent border-b border-white/10 py-2 pl-10 pr-4 outline-none text-white focus:border-[#A3E635] transition-all duration-300 resize-none rounded-none font-light placeholder-white/20" 
                     placeholder="Enter your message parameters" 
                   />
                 </div>
