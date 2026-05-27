@@ -1,16 +1,69 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
 function Particles({ view, isAntigravity }: { view: string, isAntigravity: boolean }) {
-  const count = 4000;
+  const count = 2500; // Middle ground density (was 4000, then 1500)
   const mesh = useRef<THREE.Points>(null);
-  const { mouse, viewport } = useThree();
+  const { viewport } = useThree();
+  
+  // Track mouse globally to bypass the DOM overlay blocking pointer events
+  // Also track click state for the Gravity Well effect
+  const globalState = useRef({ 
+    x: -999, // Start off-screen
+    y: -999,
+    isDown: false,
+    justReleased: false,
+    shockwaveRadius: 0,
+    shockwaveStrength: 0
+  });
 
-  const { positions, originalPositions, randomFactors } = useMemo(() => {
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      globalState.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+      globalState.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    };
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        globalState.current.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+        globalState.current.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+      }
+    };
+    const handleDown = () => { globalState.current.isDown = true; };
+    const handleUp = () => { 
+      globalState.current.isDown = false; 
+      globalState.current.justReleased = true;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('mousedown', handleDown);
+    window.addEventListener('mouseup', handleUp);
+    window.addEventListener('touchstart', handleDown);
+    window.addEventListener('touchend', handleUp);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('mousedown', handleDown);
+      window.removeEventListener('mouseup', handleUp);
+      window.removeEventListener('touchstart', handleDown);
+      window.removeEventListener('touchend', handleUp);
+    };
+  }, []);
+
+  const { positions, originalPositions, randomFactors, velocities, colors } = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const originalPositions = new Float32Array(count * 3);
     const randomFactors = new Float32Array(count);
+    const velocities = new Float32Array(count * 3);
+    const colors = new Float32Array(count * 3);
+    
+    // Base color: #6D28D9 (109, 40, 217)
+    const baseR = 0.427;
+    const baseG = 0.157;
+    const baseB = 0.851;
+
     for (let i = 0; i < count; i++) {
       const r = 12 * Math.cbrt(Math.random());
       const theta = Math.random() * 2 * Math.PI;
@@ -28,9 +81,13 @@ function Particles({ view, isAntigravity }: { view: string, isAntigravity: boole
       originalPositions[i * 3 + 1] = y;
       originalPositions[i * 3 + 2] = z;
 
+      colors[i * 3] = baseR;
+      colors[i * 3 + 1] = baseG;
+      colors[i * 3 + 2] = baseB;
+
       randomFactors[i] = Math.random() * 2 * Math.PI;
     }
-    return { positions, originalPositions, randomFactors };
+    return { positions, originalPositions, randomFactors, velocities, colors };
   }, [count]);
 
   useFrame((state) => {
@@ -51,13 +108,33 @@ function Particles({ view, isAntigravity }: { view: string, isAntigravity: boole
     mesh.current.rotation.z = THREE.MathUtils.lerp(mesh.current.rotation.z, targetZ, 0.02);
     mesh.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.02);
     
-    mesh.current.rotation.y += 0.001;
-    mesh.current.rotation.x += 0.0005;
+    // Middle ground global rotation speed
+    mesh.current.rotation.y += 0.00075;
+    mesh.current.rotation.x += 0.00035;
 
     const positionsArray = mesh.current.geometry.attributes.position.array as Float32Array;
+    const colorsArray = mesh.current.geometry.attributes.color.array as Float32Array;
     
-    const mouseX = (mouse.x * viewport.width) / 2;
-    const mouseY = (mouse.y * viewport.height) / 2;
+    // Use our globally tracked mouse instead of R3F's blocked mouse state
+    const mouseX = (globalState.current.x * viewport.width) / 2;
+    const mouseY = (globalState.current.y * viewport.height) / 2;
+
+    // Handle Shockwave trigger
+    if (globalState.current.justReleased) {
+      globalState.current.shockwaveRadius = 0;
+      globalState.current.shockwaveStrength = 1.5;
+      globalState.current.justReleased = false;
+    }
+
+    // Expand and decay shockwave
+    if (globalState.current.shockwaveStrength > 0) {
+      globalState.current.shockwaveRadius += 0.4;
+      globalState.current.shockwaveStrength *= 0.95;
+    }
+
+    // Physics constants
+    const friction = 0.88;
+    const springFactor = 0.04;
 
     for (let i = 0; i < count; i++) {
       const ix = i * 3;
@@ -74,32 +151,101 @@ function Particles({ view, isAntigravity }: { view: string, isAntigravity: boole
 
       if (isAntigravity) {
         const rf = randomFactors[i];
-        positionsArray[ix] += Math.sin(time * 2 + rf) * 0.05;
-        positionsArray[iy] += Math.cos(time * 2 + rf) * 0.05;
-        positionsArray[iz] += Math.sin(time * 1.5 + rf) * 0.05;
+        // Smooth floating in antigravity (Middle ground speed)
+        velocities[ix] += Math.sin(time * 1.5 + rf) * 0.0075;
+        velocities[iy] += Math.cos(time * 1.5 + rf) * 0.0075;
+        velocities[iz] += Math.sin(time * 1.1 + rf) * 0.0075;
+        
+        velocities[ix] *= 0.95;
+        velocities[iy] *= 0.95;
+        velocities[iz] *= 0.95;
+        
+        positionsArray[ix] += velocities[ix];
+        positionsArray[iy] += velocities[iy];
+        positionsArray[iz] += velocities[iz];
       } else {
         const dx = px - mouseX;
         const dy = py - mouseY;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        let targetX = ox;
-        let targetY = oy;
-        let targetZ = oz;
+        // Organic idle drift (Middle ground speed)
+        const rf = randomFactors[i];
+        const driftX = Math.sin(time * 0.35 + rf) * 0.3;
+        const driftY = Math.cos(time * 0.2 + rf) * 0.3;
+        const driftZ = Math.sin(time * 0.3 + rf) * 0.3;
 
-        if (dist < 3) {
-          const force = (3 - dist) / 3;
-          targetX = ox + (dx / dist) * force * 2;
-          targetY = oy + (dy / dist) * force * 2;
-          targetZ = oz + force * 2;
+        let targetX = ox + driftX;
+        let targetY = oy + driftY;
+        let targetZ = oz + driftZ;
+
+        // Mouse interaction (Gravity Well vs Repulsion)
+        if (globalState.current.isDown) {
+          // Gravity Well: Pull particles in
+          if (dist < 8) {
+            const force = (8 - dist) / 8;
+            velocities[ix] -= (dx / dist) * force * 0.15;
+            velocities[iy] -= (dy / dist) * force * 0.15;
+            velocities[iz] -= force * 0.15;
+          }
+        } else {
+          // Normal Repulsion
+          if (dist < 3) {
+            const force = (3 - dist) / 3;
+            velocities[ix] += (dx / dist) * force * 0.3;
+            velocities[iy] += (dy / dist) * force * 0.3;
+            velocities[iz] += force * 0.3; // Push outward in 3D
+          }
         }
 
-        positionsArray[ix] += (targetX - px) * 0.1;
-        positionsArray[iy] += (targetY - py) * 0.1;
-        positionsArray[iz] += (targetZ - pz) * 0.1;
+        // Shockwave interaction
+        if (globalState.current.shockwaveStrength > 0.01) {
+          const swDist = Math.abs(dist - globalState.current.shockwaveRadius);
+          if (swDist < 1.0) {
+            const swForce = (1.0 - swDist) * globalState.current.shockwaveStrength;
+            velocities[ix] += (dx / dist) * swForce * 0.5;
+            velocities[iy] += (dy / dist) * swForce * 0.5;
+            velocities[iz] += swForce * 0.5;
+          }
+        }
+
+        // Spring physics
+        velocities[ix] += (targetX - px) * springFactor;
+        velocities[iy] += (targetY - py) * springFactor;
+        velocities[iz] += (targetZ - pz) * springFactor;
+
+        // Apply friction
+        velocities[ix] *= friction;
+        velocities[iy] *= friction;
+        velocities[iz] *= friction;
+
+        // Update positions
+        positionsArray[ix] += velocities[ix];
+        positionsArray[iy] += velocities[iy];
+        positionsArray[iz] += velocities[iz];
       }
+
+      // Kinetic Color Shifting & Twinkling
+      const vx = velocities[ix];
+      const vy = velocities[iy];
+      const vz = velocities[iz];
+      const speed = Math.sqrt(vx * vx + vy * vy + vz * vz);
+      
+      // Map speed to heat (0.0 to 1.0) - Increased sensitivity drastically
+      const heat = Math.min(speed * 40.0, 1.0);
+      
+      // Add a subtle twinkle based on time and random factor
+      const rf = randomFactors[i];
+      const twinkle = (Math.sin(time * 2.0 + rf) + 1.0) * 0.5 * 0.2; // 0.0 to 0.2
+      
+      // Base: #6D28D9 (0.427, 0.157, 0.851)
+      // Hot: #00FF41 (0.0, 1.0, 0.255)
+      colorsArray[ix] = 0.427 + (0.0 - 0.427) * heat + twinkle * (1.0 - heat);
+      colorsArray[iy] = 0.157 + (1.0 - 0.157) * heat + twinkle * (1.0 - heat);
+      colorsArray[iz] = 0.851 + (0.255 - 0.851) * heat + twinkle * (1.0 - heat);
     }
 
     mesh.current.geometry.attributes.position.needsUpdate = true;
+    mesh.current.geometry.attributes.color.needsUpdate = true;
   });
 
   return (
@@ -111,12 +257,19 @@ function Particles({ view, isAntigravity }: { view: string, isAntigravity: boole
           array={positions}
           itemSize={3}
         />
+        <bufferAttribute
+          attach="attributes-color"
+          count={colors.length / 3}
+          array={colors}
+          itemSize={3}
+        />
       </bufferGeometry>
       <pointsMaterial 
         size={0.03} 
-        color="#8B5CF6" 
+        color="#ffffff" // Ensure base color is white so vertex colors multiply correctly
+        vertexColors={true}
         transparent 
-        opacity={0.6} 
+        opacity={0.6} // Boosted slightly to make the glowing colors pop more
         sizeAttenuation={true} 
         depthWrite={false}
         blending={THREE.AdditiveBlending}
