@@ -15,21 +15,8 @@ export default function App() {
     { id: 1, text: 'AETHER.OS v2.0 initialized.', type: 'system' },
     { id: 2, text: 'Type "help" to view available commands.', type: 'system' }
   ]);
-  const [isScrolled, setIsScrolled] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const logIdCounter = useRef(3);
-
-  useEffect(() => {
-    const scrollContainer = document.getElementById('main-scroll-container');
-    if (!scrollContainer) return;
-
-    const handleScroll = () => {
-      setIsScrolled(scrollContainer.scrollTop > 50);
-    };
-
-    scrollContainer.addEventListener('scroll', handleScroll);
-    return () => scrollContainer.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleSetView = (newView: string) => {
     if (newView !== view) {
@@ -115,7 +102,7 @@ export default function App() {
       {/* Fixed Header */}
       <header className={`fixed top-0 left-0 w-full z-50 pointer-events-auto transition-all duration-300 ${
         isScrolled 
-          ? 'bg-[#050014]/70 backdrop-blur-md border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]' 
+          ? 'bg-[#050014]/40 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]' 
           : 'bg-transparent border-transparent'
       }`}>
         {/* Subtle tactical glowing edge */}
@@ -126,9 +113,9 @@ export default function App() {
             onClick={() => handleSetView('HOME')}
             drag={antigravity} 
             dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }} 
-            className={`text-[10px] tracking-[0.4em] uppercase font-medium flex flex-col gap-1 cursor-pointer hover:text-[#00FF41] transition-colors duration-300 ${antigravity ? 'active:cursor-grabbing' : ''}`}
+            className={`font-mono text-xs tracking-widest uppercase cursor-pointer transition-colors duration-300 ${view === 'HOME' ? 'text-[#00FF41] font-bold' : 'text-white/70 hover:text-white'} ${antigravity ? 'active:cursor-grabbing' : ''}`}
           >
-            <div className="text-xl tracking-[0.5em] font-light">A E T H E R</div>
+            // 00. HOME
           </motion.div>
 
           <HybridNav 
