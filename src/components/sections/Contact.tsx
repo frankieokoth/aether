@@ -177,11 +177,6 @@ export function Contact({ onBack }: { onBack?: () => void }) {
         </div>
       </div>
 
-      <div className="mt-32 pt-8 border-t border-white/5 text-center">
-        <span className="text-[10px] tracking-[0.3em] text-white/20 uppercase">
-          © 2026 Frankie Okoth. Built with AETHER.OS
-        </span>
-      </div>
     </motion.div>
   );
 }

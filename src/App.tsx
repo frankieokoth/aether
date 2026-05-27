@@ -4,6 +4,7 @@ import { useAetherStore } from './store/aether-store';
 
 import { Navbar } from './components/Navbar';
 import { Intro } from './components/sections/Intro';
+import { Footer } from './components/Footer';
 
 const Scene = lazy(() => import('./components/Scene'));
 const About = lazy(() => import('./components/sections/About').then(m => ({ default: m.About })));
@@ -84,9 +85,9 @@ export default function App() {
               setView('HOME');
               document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className={`font-mono text-xs tracking-widest uppercase transition-colors duration-300 ${view === 'HOME' ? 'text-[#00FF41] font-bold' : 'text-white/70 hover:text-white'}`}
+            className={`text-xl font-light capitalize transition-colors duration-300 px-2 ${view === 'HOME' ? 'text-white' : 'text-white/50 hover:text-white/80'}`}
           >
-            // 00. HOME
+            Home
           </button>
 
           <Navbar />
@@ -117,6 +118,7 @@ export default function App() {
             </section>
           </Suspense>
         </div>
+        <Footer />
       </main>
     </div>
   );
