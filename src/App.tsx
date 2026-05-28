@@ -1,6 +1,8 @@
 import { useEffect, Suspense, lazy, useRef } from 'react';
 import { motion, useScroll } from 'motion/react';
 import { useAetherStore } from './store/aether-store';
+import { Download } from 'lucide-react';
+import { Magnetic } from './components/shared/Magnetic';
 
 import { Navbar } from './components/Navbar';
 import { Intro } from './components/sections/Intro';
@@ -66,12 +68,15 @@ export default function App() {
           Skip to content
       </a>
 
-      <header className={`fixed top-0 left-0 w-full z-50 pointer-events-auto transition-all duration-300 ${
+      <motion.header 
+        initial={{ y: '-100%' }}
+        animate={{ y: 0 }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+        className={`fixed top-0 left-0 w-full z-50 pointer-events-auto transition-colors duration-300 ${
         isScrolled 
           ? 'bg-[#050014]/40 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]' 
           : 'bg-transparent border-transparent'
       }`}>
-        <div className={`absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#A3E635]/20 to-transparent transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`} />
         
         <motion.div
           style={{ scaleX: scrollYProgress }}
@@ -89,9 +94,21 @@ export default function App() {
             Home
           </button>
 
-          <Navbar />
+          <div className="flex items-center gap-6 md:gap-10">
+            <Navbar />
+            
+            <Magnetic>
+              <a 
+                href="/resume.pdf" 
+                download 
+                className="group relative hidden md:flex items-center gap-4 bg-white/5 border border-white/10 backdrop-blur-md text-white px-6 py-2 rounded-full font-light hover:bg-white hover:text-black transition-all duration-500 overflow-hidden"
+              >
+                <span className="relative z-10 text-base">Resume</span>
+              </a>
+            </Magnetic>
+          </div>
         </div>
-      </header>
+      </motion.header>
 
       <main ref={mainScrollContainerRef} className="relative z-10 h-screen overflow-y-auto overflow-x-hidden scroll-smooth pointer-events-auto pt-20" id="main-scroll-container">
         <div className="pb-32">

@@ -108,15 +108,6 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
                   </span>
                 </a>
               </Magnetic>
-              <Magnetic>
-                <a href="/resume.pdf" download className="group flex items-center gap-3 text-base font-light text-[#A3E635]/90 hover:text-[#A3E635] transition-all capitalize hover:-translate-y-1">
-                  <Download size={22} className="transition-colors" /> 
-                  <span className="relative overflow-hidden">
-                    <span className="block transition-transform duration-300 group-hover:-translate-y-full">Resume</span>
-                    <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-[#A3E635]">Resume</span>
-                  </span>
-                </a>
-              </Magnetic>
             </div>
 
             <div className="flex flex-col xl:flex-row items-center gap-12 mt-8 xl:mt-0">
