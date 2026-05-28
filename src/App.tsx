@@ -83,7 +83,11 @@ export default function App() {
           <button 
             onClick={() => {
               setView('HOME');
-              document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+              const element = document.getElementById('home');
+              const main = document.getElementById('main-scroll-container');
+              if (element && main) {
+                main.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
+              }
             }}
             className={`text-xl font-light capitalize transition-colors duration-300 px-2 ${view === 'HOME' ? 'text-white' : 'text-white/50 hover:text-white/80'}`}
           >
@@ -101,19 +105,23 @@ export default function App() {
           </section>
           
           <Suspense fallback={null}>
-            <section id="about" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
+            <section id="about" className="pt-32 pb-16 scroll-mt-20">
               <About />
             </section>
-            <section id="work" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
+            <section id="work" className="pt-32 pb-16 scroll-mt-20">
               <ProjectGrid />
             </section>
-            <section id="stack" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
+            <section id="stack" className="pt-32 pb-16 scroll-mt-20">
               <Skills />
             </section>
-            <section id="contact" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
+            <section id="contact" className="pt-32 pb-32 scroll-mt-20">
               <Contact onBack={() => {
                 setView(prevView);
-                document.getElementById(prevView.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+                const element = document.getElementById(prevView.toLowerCase());
+                const main = document.getElementById('main-scroll-container');
+                if (element && main) {
+                  main.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
+                }
               }} />
             </section>
           </Suspense>

@@ -1,115 +1,101 @@
 import { motion } from 'motion/react';
-import { Mail, Github, Linkedin, FileText } from 'lucide-react';
 import { transition } from '../shared/animations';
 
 export function About() {
-  const transitionProps = { duration: 0.7, ease: "easeOut" as const };
+  const transitionProps = { duration: 1, ease: [0.22, 1, 0.36, 1] as const };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.98 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={transition}
-      className="w-full max-w-5xl mx-auto px-8 md:px-12 text-white/80 font-light leading-loose"
-    >
-      <motion.h2 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-10px" }}
-        transition={transitionProps}
-        className="text-[10px] tracking-[0.4em] uppercase text-white/40 mb-16"
+    <div className="relative w-full py-32" id="about">
+      <motion.div
+        initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
+        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={transition}
+        className="w-full max-w-7xl mx-auto px-8 md:px-16"
       >
-        System.Identity
-      </motion.h2>
-
-      <motion.p 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-10px" }}
-        transition={transitionProps}
-        className="text-2xl md:text-4xl mb-16 text-white tracking-tight leading-tight"
-      >
-        I engineer intelligent systems and immersive realities.
-      </motion.p>
-
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-12">
-        <div className="lg:col-span-3 flex flex-col gap-6">
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10px" }}
-            transition={transitionProps}
-            className="text-sm md:text-base text-white/50 tracking-wide"
-          >
-            I'm a software engineer focused on building well-structured, reliable systems. My work primarily centers on backend development, where I design scalable services, develop clean APIs, and implement systems that emphasize clarity, maintainability, and long-term performance.
-          </motion.p>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10px" }}
-            transition={transitionProps}
-            className="text-sm md:text-base text-white/50 tracking-wide"
-          >
-            I approach software with a creator's mindset and an engineer's discipline—solving problems through thoughtful design, structured logic, and practical implementation. I'm particularly interested in how complexity can be reduced through clear architecture and disciplined engineering.
-          </motion.p>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10px" }}
-          transition={transitionProps}
-          className="lg:col-span-2 hidden lg:flex flex-col gap-6 p-6 border border-[#8B5CF6]/20 bg-[#050014]/80 relative overflow-hidden rounded-sm"
-        >
-          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent opacity-50" />
+        <div className="flex flex-col gap-16 items-center">
           
-          <h3 className="text-[10px] tracking-[0.3em] text-white/40 uppercase border-b border-[#8B5CF6]/20 pb-4 flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#A3E635]" />
-            System Profile
-          </h3>
-          
-          <div className="text-[10px] font-mono tracking-widest flex flex-col gap-4">
-            <div className="flex justify-between items-center">
-              <span className="text-white/40">FOCUS:</span>
-              <span className="text-[#A3E635]">Backend Systems</span>
+          {/* Main Content: Massive Statement & Text */}
+          <div className="w-full flex flex-col gap-12 items-center">
+            <div className="flex items-center justify-center gap-4">
+              <span className="text-[10px] tracking-[0.3em] uppercase text-white/30 font-mono">
+                01 //
+              </span>
+              <span className="text-xl font-light text-white/50 capitalize">
+                About
+              </span>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-white/40">STACK:</span>
-              <span className="text-white/80">Go, TS, Python</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-white/40">INTERESTS:</span>
-              <span className="text-white/80">AI, System Design</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-white/40">STATUS:</span>
-              <span className="text-[#A3E635]">Active</span>
+
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10px" }}
+              transition={transitionProps}
+              className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/50 leading-[1.1] max-w-4xl mx-auto text-center"
+            >
+              I engineer intelligent <br className="hidden md:block" />
+              systems and <span className="italic text-white/70">immersive</span> realities.
+            </motion.h2>
+
+            <div className="flex flex-col gap-6 max-w-3xl mt-4 mx-auto text-left md:text-justify">
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10px" }}
+                transition={{ ...transitionProps, delay: 0.1 }}
+                className="text-lg md:text-xl text-white/60 font-light leading-relaxed tracking-wide"
+              >
+                I’m a software engineer driven by a fascination with the future of human experience. My work and interests sit at the intersection of artificial intelligence, virtual reality, and immersive systems. These technologies go beyond utility and reshape how people perceive, interact with, and experience the digital world.
+              </motion.p>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10px" }}
+                transition={{ ...transitionProps, delay: 0.15 }}
+                className="text-lg md:text-xl text-white/60 font-light leading-relaxed tracking-wide"
+              >
+                I’ve always been drawn to work that carries atmosphere and emotional weight: music that feels timeless, films that linger long after they end, design that communicates identity without explanation, and systems that feel almost invisible in their elegance. These influences shape how I think about engineering. I’m not only interested in building what works. I’m interested in building what feels right.
+              </motion.p>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10px" }}
+                transition={{ ...transitionProps, delay: 0.2 }}
+                className="text-lg md:text-xl text-white/60 font-light leading-relaxed tracking-wide"
+              >
+                Beyond code, I’m interested in how intelligent systems are designed, how human perception interacts with interfaces, and how creativity and computation reinforce each other. I spend most of my time strengthening the foundations that allow me to work on more complex systems with clarity and depth.
+              </motion.p>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10px" }}
+                transition={{ ...transitionProps, delay: 0.25 }}
+                className="text-lg md:text-xl text-white/60 font-light leading-relaxed tracking-wide"
+              >
+                Long term, I aim to contribute to research in artificial intelligence and immersive computing, particularly in areas that explore more intuitive, expressive, and human-centered forms of interaction.
+              </motion.p>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10px" }}
+                transition={{ ...transitionProps, delay: 0.3 }}
+                className="text-lg md:text-xl text-white/60 font-light leading-relaxed tracking-wide"
+              >
+                Right now, I’m focused on becoming a stronger engineer, sharpening my understanding of computer science fundamentals, building meaningful projects, and developing the discipline required to work on complex technical systems.
+              </motion.p>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10px" }}
+                transition={{ ...transitionProps, delay: 0.35 }}
+                className="text-lg md:text-xl text-white/60 font-light leading-relaxed tracking-wide"
+              >
+                I’m interested in building technology that doesn’t just perform tasks, but changes how people think and experience the world.
+              </motion.p>
             </div>
           </div>
-        </motion.div>
-      </div>
-
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-10px" }}
-        transition={transitionProps}
-        className="flex flex-wrap gap-8 border-t border-[#8B5CF6]/20 pt-8"
-      >
-        <a href="mailto:frankieokoth99@gmail.com" className="text-white/40 hover:text-[#A3E635] transition-colors" aria-label="Email">
-          <Mail size={20} strokeWidth={1.5} />
-        </a>
-        <a href="https://github.com/frankieokoth" target="_blank" rel="noreferrer" className="text-white/40 hover:text-[#A3E635] transition-colors" aria-label="GitHub">
-          <Github size={20} strokeWidth={1.5} />
-        </a>
-        <a href="https://linkedin.com/in/franklin-p-okoth/" target="_blank" rel="noreferrer" className="text-white/40 hover:text-[#A3E635] transition-colors" aria-label="LinkedIn">
-          <Linkedin size={20} strokeWidth={1.5} />
-        </a>
-        <a href="#" className="text-white/40 hover:text-[#A3E635] transition-colors" aria-label="Resume">
-          <FileText size={20} strokeWidth={1.5} />
-        </a>
+        </div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 }
