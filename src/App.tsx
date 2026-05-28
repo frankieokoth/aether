@@ -71,11 +71,11 @@ export default function App() {
           ? 'bg-[#050014]/40 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]' 
           : 'bg-transparent border-transparent'
       }`}>
-        <div className={`absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00FF41]/20 to-transparent transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`} />
+        <div className={`absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#A3E635]/20 to-transparent transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`} />
         
         <motion.div
           style={{ scaleX: scrollYProgress }}
-          className="absolute top-0 left-0 right-0 h-[2px] bg-[#00FF41] origin-left z-[60]"
+          className="absolute top-0 left-0 right-0 h-[2px] bg-[#A3E635] origin-left z-[60]"
         />
         
         <div className="max-w-7xl mx-auto px-8 md:px-16 h-20 flex items-center justify-between">
@@ -111,7 +111,7 @@ export default function App() {
             </section>
           </Suspense>
         </div>
-        <Footer />
+        <Footer scrollContainerRef={mainScrollContainerRef} />
       </main>
     </div>
   );

@@ -3,10 +3,11 @@ import { useRef, useEffect, useState } from 'react';
 import { ArrowUpRight, Github, Linkedin, Mail, Instagram, Twitter, Download } from 'lucide-react';
 import { Magnetic } from './shared/Magnetic';
 
-export function Footer() {
+export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefObject<HTMLElement> }) {
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
+    container: scrollContainerRef,
     offset: ['start end', 'end end']
   });
 
@@ -18,10 +19,6 @@ export function Footer() {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   return (
     <div id="contact" className="relative overflow-hidden w-full mt-32 z-20 scroll-mt-20">
@@ -131,13 +128,6 @@ export function Footer() {
                   All Rights Reserved
                 </span>
               </div>
-              <button 
-                onClick={scrollToTop} 
-                className="group flex items-center gap-4 text-[10px] tracking-[0.2em] text-white/70 hover:text-white uppercase transition-colors"
-              >
-                <span className="w-8 h-[1px] bg-white/40 group-hover:bg-[#A3E635] transition-colors" />
-                Back to top
-              </button>
             </div>
           </div>
           
