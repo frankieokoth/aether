@@ -18,10 +18,10 @@ export function About() {
           {/* Main Content: Massive Statement & Text */}
           <div className="w-full flex flex-col gap-12 items-center">
             <div className="flex items-center justify-center gap-4">
-              <span className="text-[10px] tracking-[0.3em] uppercase text-white/30 font-mono">
+              <span className="text-[10px] tracking-[0.3em] uppercase text-white/70 font-mono">
                 01 //
               </span>
-              <span className="text-xl font-light text-white/50 capitalize">
+              <span className="text-xl font-light text-white capitalize">
                 About
               </span>
             </div>
@@ -43,7 +43,7 @@ export function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10px" }}
                 transition={{ ...transitionProps, delay: 0.1 }}
-                className="text-lg md:text-xl text-white/60 font-light leading-relaxed tracking-wide"
+                className="text-lg md:text-xl text-white/70 font-light leading-relaxed tracking-wide"
               >
                 I’m a software engineer driven by a fascination with the future of human experience. My work and interests sit at the intersection of artificial intelligence, virtual reality, and immersive systems. These technologies go beyond utility and reshape how people perceive, interact with, and experience the digital world.
               </motion.p>
@@ -52,7 +52,7 @@ export function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10px" }}
                 transition={{ ...transitionProps, delay: 0.15 }}
-                className="text-lg md:text-xl text-white/60 font-light leading-relaxed tracking-wide"
+                className="text-lg md:text-xl text-white/70 font-light leading-relaxed tracking-wide"
               >
                 I’ve always been drawn to work that carries atmosphere and emotional weight: music that feels timeless, films that linger long after they end, design that communicates identity without explanation, and systems that feel almost invisible in their elegance. These influences shape how I think about engineering. I’m not only interested in building what works. I’m interested in building what feels right.
               </motion.p>
@@ -61,7 +61,7 @@ export function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10px" }}
                 transition={{ ...transitionProps, delay: 0.2 }}
-                className="text-lg md:text-xl text-white/60 font-light leading-relaxed tracking-wide"
+                className="text-lg md:text-xl text-white/70 font-light leading-relaxed tracking-wide"
               >
                 Beyond code, I’m interested in how intelligent systems are designed, how human perception interacts with interfaces, and how creativity and computation reinforce each other. I spend most of my time strengthening the foundations that allow me to work on more complex systems with clarity and depth.
               </motion.p>
@@ -70,7 +70,7 @@ export function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10px" }}
                 transition={{ ...transitionProps, delay: 0.25 }}
-                className="text-lg md:text-xl text-white/60 font-light leading-relaxed tracking-wide"
+                className="text-lg md:text-xl text-white/70 font-light leading-relaxed tracking-wide"
               >
                 Long term, I aim to contribute to research in artificial intelligence and immersive computing, particularly in areas that explore more intuitive, expressive, and human-centered forms of interaction.
               </motion.p>
@@ -79,7 +79,7 @@ export function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10px" }}
                 transition={{ ...transitionProps, delay: 0.3 }}
-                className="text-lg md:text-xl text-white/60 font-light leading-relaxed tracking-wide"
+                className="text-lg md:text-xl text-white/70 font-light leading-relaxed tracking-wide"
               >
                 Right now, I’m focused on becoming a stronger engineer, sharpening my understanding of computer science fundamentals, building meaningful projects, and developing the discipline required to work on complex technical systems.
               </motion.p>
@@ -88,7 +88,7 @@ export function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10px" }}
                 transition={{ ...transitionProps, delay: 0.35 }}
-                className="text-lg md:text-xl text-white/60 font-light leading-relaxed tracking-wide"
+                className="text-lg md:text-xl text-white/70 font-light leading-relaxed tracking-wide"
               >
                 I’m interested in building technology that doesn’t just perform tasks, but changes how people think and experience the world.
               </motion.p>
