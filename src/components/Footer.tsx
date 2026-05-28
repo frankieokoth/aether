@@ -24,20 +24,20 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
     <div id="contact" className="relative overflow-hidden w-full mt-32 z-20 scroll-mt-20">
       <motion.footer 
         ref={containerRef}
-        className="relative w-full border-t border-white/10 bg-[#050014]/30 backdrop-blur-2xl pt-48 pb-16 px-8 md:px-16"
+        className="relative w-full border-t border-white/10 bg-[#050014]/30 backdrop-blur-2xl pt-24 md:pt-48 pb-16 px-6 md:px-16"
         style={{ y }}
       >
         <div className="max-w-7xl mx-auto relative z-10">
           
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-32 gap-24">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-32 gap-12 md:gap-24">
             <div className="flex flex-col gap-10 max-w-2xl">
-              <h2 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tighter text-white leading-[1.1]">
+              <h2 className="text-4xl md:text-7xl lg:text-8xl font-light tracking-tighter text-white leading-[1.1]">
                 Let's build <br/>
                 something <span className="italic text-white/40">extraordinary.</span>
               </h2>
               <div className="self-start">
                 <Magnetic>
-                  <a href="mailto:frankieokoth99@gmail.com" className="group relative flex items-center gap-6 bg-white/5 border border-white/10 backdrop-blur-md text-white px-10 py-5 rounded-full font-light tracking-wide hover:bg-white hover:text-black transition-all duration-500 overflow-hidden">
+                  <a href="mailto:frankieokoth99@gmail.com" className="group relative flex items-center gap-6 bg-white/5 border border-white/10 backdrop-blur-md text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-light tracking-wide hover:bg-white hover:text-black transition-all duration-500 overflow-hidden">
                     <span className="relative z-10 text-lg">Start a Conversation</span>
                     <span className="relative z-10 bg-white/10 group-hover:bg-black group-hover:text-white text-white p-2.5 rounded-full group-hover:rotate-45 transition-all duration-500">
                       <ArrowUpRight size={18} />

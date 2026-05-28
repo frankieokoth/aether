@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Github } from 'lucide-react';
 import { transition } from '../shared/animations';
 import { projects, type Project } from '../../data/projects';
 
@@ -44,7 +44,7 @@ function ProjectCard({ p, i, containerRef }: { p: Project, i: number, containerR
       <div className="absolute inset-0 bg-gradient-to-t from-[#050014] via-[#050014]/80 to-transparent z-10 group-hover:via-[#050014]/90 transition-all duration-700" />
       
       {/* Card Content */}
-      <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end z-20">
+      <div className="absolute inset-0 p-6 md:p-12 flex flex-col justify-end z-20">
         <div className="translate-y-8 md:translate-y-16 group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col gap-4">
           <div className="flex items-center gap-4 mb-2">
             <span className="text-[10px] tracking-[0.3em] text-white/30 font-mono uppercase block">{p.id} //</span>
@@ -67,15 +67,31 @@ function ProjectCard({ p, i, containerRef }: { p: Project, i: number, containerR
                 ))}
               </div>
               
-              <a 
-                href={p.link} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-white hover:text-[#A3E635] transition-colors duration-300"
-              >
-                <span>View System</span>
-                <ArrowUpRight size={14} />
-              </a>
+              <div className="flex items-center gap-4">
+                {p.githubLink && (
+                  <a 
+                    href={p.githubLink} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-white/60 hover:text-white border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full transition-all duration-300 font-light"
+                  >
+                    <Github size={13} strokeWidth={1.5} />
+                    <span>Code</span>
+                  </a>
+                )}
+                
+                {p.liveLink && (
+                  <a 
+                    href={p.liveLink} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-[#A3E635] hover:text-white border border-[#A3E635]/20 hover:border-[#A3E635]/40 bg-[#A3E635]/5 hover:bg-[#A3E635]/15 px-4 py-2 rounded-full transition-all duration-300 font-light"
+                  >
+                    <span>Live</span>
+                    <ArrowUpRight size={13} strokeWidth={1.5} />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>

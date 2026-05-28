@@ -13,7 +13,7 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="flex items-center gap-4 md:gap-8">
+    <nav className="flex items-center gap-3 md:gap-8 overflow-x-auto overflow-y-hidden snap-x no-scrollbar w-full max-w-[60vw] md:max-w-none hide-scrollbar">
       {navItems.map((item) => {
         const isActive = view === item.id;
         return (
@@ -23,7 +23,7 @@ export function Navbar() {
               setView(item.id);
               document.getElementById(item.id.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className={`relative text-xl font-light capitalize transition-all duration-300 group py-1 px-2 ${isActive ? 'text-white' : 'text-white/50 hover:text-white/80'}`}
+            className={`relative text-base md:text-xl font-light capitalize transition-all duration-300 group py-1 px-2 shrink-0 ${isActive ? 'text-white' : 'text-white/50 hover:text-white/80'}`}
           >
             {item.label}
             {isActive && (

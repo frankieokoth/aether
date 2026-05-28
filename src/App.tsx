@@ -83,7 +83,7 @@ export default function App() {
           className="absolute top-0 left-0 right-0 h-[2px] bg-[#A3E635] origin-left z-[60]"
         />
         
-        <div className="max-w-7xl mx-auto px-8 md:px-16 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 md:px-16 h-20 flex items-center justify-between">
           <button 
             onClick={() => {
               setView('HOME');
@@ -94,7 +94,7 @@ export default function App() {
             Home
           </button>
 
-          <div className="flex items-center gap-6 md:gap-10">
+          <div className="flex items-center gap-4 md:gap-10">
             <Navbar />
             
             <Magnetic>
