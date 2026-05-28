@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef, useEffect, useState } from 'react';
-import { ArrowUpRight, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowUpRight, Github, Linkedin, Mail, Instagram, Twitter, Download } from 'lucide-react';
 import { Magnetic } from './shared/Magnetic';
 
 export function Footer() {
@@ -10,7 +10,6 @@ export function Footer() {
     offset: ['start end', 'end end']
   });
 
-  // Parallax effect: the footer slides up slightly slower than the scroll
   const y = useTransform(scrollYProgress, [0, 1], [-150, 0]);
   
   const [time, setTime] = useState(new Date());
@@ -33,7 +32,6 @@ export function Footer() {
       >
         <div className="max-w-7xl mx-auto relative z-10">
           
-          {/* Top section: Massive typography & Call to Action */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-32 gap-24">
             <div className="flex flex-col gap-10 max-w-2xl">
               <h2 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tighter text-white leading-[1.1]">
@@ -42,10 +40,10 @@ export function Footer() {
               </h2>
               <div className="self-start">
                 <Magnetic>
-                  <a href="mailto:frankieokoth99@gmail.com" className="group flex items-center gap-4 bg-white text-black px-8 py-5 rounded-full font-medium tracking-wide hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)]">
-                    Start a Conversation
-                    <span className="group-hover:rotate-45 transition-transform duration-300 bg-black text-white p-2 rounded-full">
-                      <ArrowUpRight size={16} />
+                  <a href="mailto:frankieokoth99@gmail.com" className="group relative flex items-center gap-6 bg-white/5 border border-white/10 backdrop-blur-md text-white px-10 py-5 rounded-full font-light tracking-wide hover:bg-white hover:text-black transition-all duration-500 overflow-hidden">
+                    <span className="relative z-10 text-lg">Start a Conversation</span>
+                    <span className="relative z-10 bg-white/10 group-hover:bg-black group-hover:text-white text-white p-2.5 rounded-full group-hover:rotate-45 transition-all duration-500">
+                      <ArrowUpRight size={18} />
                     </span>
                   </a>
                 </Magnetic>
@@ -64,44 +62,83 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Divider */}
           <div className="w-full h-[1px] bg-gradient-to-r from-white/10 via-white/5 to-transparent mb-16" />
 
-          {/* Bottom Section: Links & Copyright */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-12">
-            
-            <div className="flex flex-wrap items-center gap-x-12 gap-y-6">
+          <div className="flex flex-col xl:flex-row justify-between items-center gap-16">
+            <div className="flex flex-wrap items-center justify-center xl:justify-start gap-x-12 gap-y-8">
               <Magnetic>
-                <a href="https://github.com/frankieokoth" target="_blank" rel="noreferrer" className="group flex items-center gap-3 text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">
-                  <Github size={16} className="group-hover:text-[#8B5CF6] transition-colors" /> GitHub
+                <a href="https://github.com/frankieokoth" target="_blank" rel="noreferrer" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
+                  <Github size={22} className="transition-colors" /> 
+                  <span className="relative overflow-hidden">
+                    <span className="block transition-transform duration-300 group-hover:-translate-y-full">GitHub</span>
+                    <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">GitHub</span>
+                  </span>
                 </a>
               </Magnetic>
               <Magnetic>
-                <a href="https://linkedin.com/in/franklin-p-okoth/" target="_blank" rel="noreferrer" className="group flex items-center gap-3 text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">
-                  <Linkedin size={16} className="group-hover:text-[#8B5CF6] transition-colors" /> LinkedIn
+                <a href="https://linkedin.com/in/franklin-p-okoth/" target="_blank" rel="noreferrer" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
+                  <Linkedin size={22} className="transition-colors" /> 
+                  <span className="relative overflow-hidden">
+                    <span className="block transition-transform duration-300 group-hover:-translate-y-full">LinkedIn</span>
+                    <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">LinkedIn</span>
+                  </span>
                 </a>
               </Magnetic>
               <Magnetic>
-                <a href="mailto:frankieokoth99@gmail.com" className="group flex items-center gap-3 text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">
-                  <Mail size={16} className="group-hover:text-[#8B5CF6] transition-colors" /> Email
+                <a href="#" target="_blank" rel="noreferrer" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
+                  <Twitter size={22} className="transition-colors" /> 
+                  <span className="relative overflow-hidden">
+                    <span className="block transition-transform duration-300 group-hover:-translate-y-full">X (Twitter)</span>
+                    <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">X (Twitter)</span>
+                  </span>
+                </a>
+              </Magnetic>
+              <Magnetic>
+                <a href="#" target="_blank" rel="noreferrer" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
+                  <Instagram size={22} className="transition-colors" /> 
+                  <span className="relative overflow-hidden">
+                    <span className="block transition-transform duration-300 group-hover:-translate-y-full">Instagram</span>
+                    <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">Instagram</span>
+                  </span>
+                </a>
+              </Magnetic>
+              <Magnetic>
+                <a href="mailto:frankieokoth99@gmail.com" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
+                  <Mail size={22} className="transition-colors" /> 
+                  <span className="relative overflow-hidden">
+                    <span className="block transition-transform duration-300 group-hover:-translate-y-full">Email</span>
+                    <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">Email</span>
+                  </span>
+                </a>
+              </Magnetic>
+              <Magnetic>
+                <a href="/resume.pdf" download className="group flex items-center gap-3 text-base font-light text-[#A3E635]/90 hover:text-[#A3E635] transition-all capitalize hover:-translate-y-1">
+                  <Download size={22} className="transition-colors" /> 
+                  <span className="relative overflow-hidden">
+                    <span className="block transition-transform duration-300 group-hover:-translate-y-full">Resume</span>
+                    <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-[#A3E635]">Resume</span>
+                  </span>
                 </a>
               </Magnetic>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <span className="text-[10px] tracking-[0.2em] text-white/20 uppercase font-mono">
-                © {new Date().getFullYear()} F.OKOTH
-              </span>
+            <div className="flex flex-col xl:flex-row items-center gap-12 mt-8 xl:mt-0">
+              <div className="flex flex-col items-center xl:items-end gap-1">
+                <span className="text-2xl md:text-3xl font-light text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 tracking-wide">
+                  © {new Date().getFullYear()} Frankie Okoth.
+                </span>
+                <span className="text-[11px] font-light tracking-[0.25em] text-white/60 uppercase">
+                  All Rights Reserved
+                </span>
+              </div>
               <button 
                 onClick={scrollToTop} 
-                className="group flex items-center gap-4 text-[10px] tracking-[0.2em] text-white/40 hover:text-white uppercase transition-colors"
-                aria-label="Scroll to top"
+                className="group flex items-center gap-4 text-[10px] tracking-[0.2em] text-white/70 hover:text-white uppercase transition-colors"
               >
-                <span className="w-8 h-[1px] bg-white/20 group-hover:bg-[#A3E635] transition-colors" />
+                <span className="w-8 h-[1px] bg-white/40 group-hover:bg-[#A3E635] transition-colors" />
                 Back to top
               </button>
             </div>
-
           </div>
           
         </div>
