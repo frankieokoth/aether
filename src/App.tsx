@@ -83,11 +83,7 @@ export default function App() {
           <button 
             onClick={() => {
               setView('HOME');
-              const element = document.getElementById('home');
-              const main = document.getElementById('main-scroll-container');
-              if (element && main) {
-                main.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
-              }
+              document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
             }}
             className={`text-xl font-light capitalize transition-colors duration-300 px-2 ${view === 'HOME' ? 'text-white' : 'text-white/50 hover:text-white/80'}`}
           >
@@ -117,11 +113,7 @@ export default function App() {
             <section id="contact" className="pt-32 pb-32 scroll-mt-20">
               <Contact onBack={() => {
                 setView(prevView);
-                const element = document.getElementById(prevView.toLowerCase());
-                const main = document.getElementById('main-scroll-container');
-                if (element && main) {
-                  main.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
-                }
+                document.getElementById(prevView.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
               }} />
             </section>
           </Suspense>

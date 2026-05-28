@@ -5,7 +5,7 @@ export function About() {
   const transitionProps = { duration: 1, ease: [0.22, 1, 0.36, 1] as const };
 
   return (
-    <div className="relative w-full py-32" id="about">
+    <div className="relative w-full py-32">
       <motion.div
         initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
         whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}

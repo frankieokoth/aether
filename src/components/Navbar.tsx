@@ -21,14 +21,7 @@ export function Navbar() {
             key={item.id}
             onClick={() => {
               setView(item.id);
-              const element = document.getElementById(item.id.toLowerCase());
-              const main = document.getElementById('main-scroll-container');
-              if (element && main) {
-                main.scrollTo({
-                  top: element.offsetTop - 80, // offset for fixed header
-                  behavior: 'smooth'
-                });
-              }
+              document.getElementById(item.id.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
             }}
             className={`relative text-xl font-light capitalize transition-all duration-300 group py-1 px-2 ${isActive ? 'text-white' : 'text-white/50 hover:text-white/80'}`}
           >
