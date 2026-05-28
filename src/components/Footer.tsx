@@ -24,7 +24,7 @@ export function Footer() {
   };
 
   return (
-    <div className="relative overflow-hidden w-full mt-32 z-20">
+    <div id="contact" className="relative overflow-hidden w-full mt-32 z-20 scroll-mt-20">
       <motion.footer 
         ref={containerRef}
         className="relative w-full border-t border-white/10 bg-[#050014]/30 backdrop-blur-2xl pt-48 pb-16 px-8 md:px-16"

@@ -10,7 +10,6 @@ const Scene = lazy(() => import('./components/Scene'));
 const About = lazy(() => import('./components/sections/About').then(m => ({ default: m.About })));
 const ProjectGrid = lazy(() => import('./components/sections/ProjectGrid').then(m => ({ default: m.ProjectGrid })));
 const Skills = lazy(() => import('./components/sections/Skills').then(m => ({ default: m.Skills })));
-const Contact = lazy(() => import('./components/sections/Contact').then(m => ({ default: m.Contact })));
 
 export default function App() {
   const view = useAetherStore((s) => s.view);
@@ -107,14 +106,8 @@ export default function App() {
             <section id="work" className="pt-32 pb-16 scroll-mt-20">
               <ProjectGrid />
             </section>
-            <section id="stack" className="pt-32 pb-16 scroll-mt-20">
+            <section id="stack" className="pt-32 pb-32 scroll-mt-20">
               <Skills />
-            </section>
-            <section id="contact" className="pt-32 pb-32 scroll-mt-20">
-              <Contact onBack={() => {
-                setView(prevView);
-                document.getElementById(prevView.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
-              }} />
             </section>
           </Suspense>
         </div>
