@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { useAetherStore } from '../store/aether-store';
-import { Github, Linkedin, Twitter, Mail, ArrowUpRight, X } from 'lucide-react';
+import { Github, Linkedin, Twitter, ArrowUpRight, X } from 'lucide-react';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +20,6 @@ export function Navbar() {
     { href: 'https://github.com/frankieokoth', icon: Github, label: 'GitHub' },
     { href: 'https://linkedin.com/in/franklin-p-okoth/', icon: Linkedin, label: 'LinkedIn' },
     { href: '#', icon: Twitter, label: 'X' },
-    { href: 'mailto:frankieokoth99@gmail.com', icon: Mail, label: 'Email' },
   ];
 
   // Lock the actual scroll container when menu is open
