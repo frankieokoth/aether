@@ -35,6 +35,21 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
         className="relative w-full border-t border-white/10 bg-[#050014]/30 backdrop-blur-2xl pt-24 md:pt-48 pb-16 px-6 md:px-16"
         style={{ y }}
       >
+        {/* Infinite Brutalist Marquee */}
+        <div className="absolute top-0 left-0 w-full overflow-hidden py-4 pointer-events-none select-none border-b border-white/5">
+          <motion.div 
+            animate={{ x: ["0%", "-50%"] }} 
+            transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
+            className="flex w-max"
+          >
+            {[...Array(4)].map((_, i) => (
+              <span key={i} className="text-4xl md:text-5xl font-black tracking-[0.2em] text-white/[0.03] uppercase px-8 whitespace-nowrap">
+                LET'S BUILD SOMETHING EXTRAORDINARY — FRANKIE OKOTH — OPEN FOR OPPORTUNITIES —
+              </span>
+            ))}
+          </motion.div>
+        </div>
+
         <div className="max-w-7xl mx-auto relative z-10">
           
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-32 gap-12 md:gap-24">
@@ -67,8 +82,8 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
 
           <div className="w-full h-[1px] bg-gradient-to-r from-white/10 via-white/5 to-transparent mb-16" />
 
-          <div className="flex flex-col xl:flex-row justify-between items-center gap-16">
-            <div className="flex flex-wrap items-center justify-center xl:justify-start gap-x-6 md:gap-x-12 gap-y-6 md:gap-y-8">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-16">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 md:gap-x-12 gap-y-6 md:gap-y-8">
               <Magnetic>
                 <a href="https://github.com/frankieokoth" target="_blank" rel="noreferrer" aria-label="GitHub" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
                   <Github size={22} className="transition-colors" aria-hidden="true" /> 
@@ -105,19 +120,10 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
                   </span>
                 </a>
               </Magnetic>
-              <Magnetic>
-                <a href="mailto:frankieokoth99@gmail.com" aria-label="Email" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
-                  <Mail size={22} className="transition-colors" aria-hidden="true" /> 
-                  <span className="relative overflow-hidden" aria-hidden="true">
-                    <span className="block transition-transform duration-300 group-hover:-translate-y-full">Email</span>
-                    <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">Email</span>
-                  </span>
-                </a>
-              </Magnetic>
             </div>
 
-            <div className="flex flex-col xl:flex-row items-center gap-12 mt-8 xl:mt-0">
-              <div className="flex flex-col items-center xl:items-end gap-1">
+            <div className="flex flex-col lg:flex-row items-center gap-12 mt-8 lg:mt-0">
+              <div className="flex flex-col items-center lg:items-end gap-1">
                 <span className="text-lg md:text-3xl font-light text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 tracking-wide">
                   © {new Date().getFullYear()} Frankie Okoth.
                 </span>
