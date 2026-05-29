@@ -45,7 +45,7 @@ export function Skills() {
               <span className="text-[10px] tracking-[0.3em] uppercase text-white/30 font-mono block mb-4">
                 0{groupIdx + 1} //
               </span>
-              <h3 className="text-2xl md:text-3xl font-light tracking-tight text-white/80">
+              <h3 className="text-2xl md:text-3xl font-light tracking-tight text-white">
                 {group.category}
               </h3>
             </div>
@@ -57,7 +57,7 @@ export function Skills() {
                   key={item} 
                   className="group relative flex items-center justify-between py-6 md:py-8 border-b border-white/[0.02] last:border-0 cursor-crosshair"
                 >
-                  <span className="text-3xl md:text-5xl font-light tracking-tight text-white/70 md:text-white/30 md:group-hover:text-white active:text-white transition-colors duration-500">
+                  <span className="text-3xl md:text-5xl font-light tracking-tight text-white/50 md:text-white/30 md:group-hover:text-white active:text-white transition-colors duration-500">
                     {item}
                   </span>
                   
