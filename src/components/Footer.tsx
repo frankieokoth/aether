@@ -3,6 +3,21 @@ import { useRef, useEffect, useState } from 'react';
 import { ArrowUpRight, Github, Linkedin, Mail, Instagram, Twitter, Download } from 'lucide-react';
 import { Magnetic } from './shared/Magnetic';
 
+function LocalTimeDisplay() {
+  const [time, setTime] = useState(new Date());
+  
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="font-mono text-xl tracking-widest text-white/80 tabular-nums">
+      {time.toLocaleTimeString('en-US', { hour12: false, timeZoneName: 'short' })}
+    </div>
+  );
+}
+
 export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefObject<HTMLElement> }) {
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -12,13 +27,6 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [-150, 0]);
-  
-  const [time, setTime] = useState(new Date());
-  
-  useEffect(() => {
-    const timer = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <div id="contact" className="relative overflow-hidden w-full mt-16 md:mt-32 z-20 scroll-mt-20">
@@ -33,7 +41,7 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
             <div className="flex flex-col gap-10 max-w-2xl">
               <h2 className="text-4xl md:text-7xl lg:text-8xl font-light tracking-tighter text-white leading-[1.1]">
                 Let's build <br/>
-                something <span className="italic text-white/40">extraordinary.</span>
+                something <span className="italic text-white/40 hover:text-[#A3E635] hover:drop-shadow-[0_0_15px_rgba(163,230,53,0.5)] transition-all duration-700 cursor-default">extraordinary.</span>
               </h2>
               <div className="self-start">
                 <Magnetic>
@@ -49,9 +57,7 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
 
             <div className="flex flex-col items-start md:items-end gap-2 text-left md:text-right">
               <span className="text-[10px] tracking-[0.3em] uppercase text-white/30 mb-2">Local Time</span>
-              <div className="font-mono text-xl tracking-widest text-white/80 tabular-nums">
-                {time.toLocaleTimeString('en-US', { hour12: false, timeZoneName: 'short' })}
-              </div>
+              <LocalTimeDisplay />
               <div className="flex items-center gap-2 mt-2 px-3 py-1.5 rounded-full border border-[#A3E635]/20 bg-[#A3E635]/5 backdrop-blur-md">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#A3E635] animate-pulse shadow-[0_0_8px_#A3E635]" />
                 <span className="text-[10px] tracking-widest uppercase text-[#A3E635]">Available for work</span>
