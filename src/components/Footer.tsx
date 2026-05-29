@@ -45,9 +45,9 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
               </h2>
               <div className="self-start">
                 <Magnetic>
-                  <a href="mailto:frankieokoth99@gmail.com" className="group relative flex items-center gap-6 bg-white/5 border border-white/10 backdrop-blur-md text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-light tracking-wide hover:bg-white hover:text-black transition-all duration-500 overflow-hidden">
+                  <a href="mailto:frankieokoth99@gmail.com" aria-label="Start a Conversation" className="group relative flex items-center gap-6 bg-white/5 border border-white/10 backdrop-blur-md text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-light tracking-wide hover:bg-white hover:text-black transition-all duration-500 overflow-hidden">
                     <span className="relative z-10 text-lg">Start a Conversation</span>
-                    <span className="relative z-10 bg-white/10 group-hover:bg-black group-hover:text-white text-white p-2.5 rounded-full group-hover:rotate-45 transition-all duration-500">
+                    <span className="relative z-10 bg-white/10 group-hover:bg-black group-hover:text-white text-white p-2.5 rounded-full group-hover:rotate-45 transition-all duration-500" aria-hidden="true">
                       <ArrowUpRight size={18} />
                     </span>
                   </a>
@@ -70,45 +70,45 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
           <div className="flex flex-col xl:flex-row justify-between items-center gap-16">
             <div className="flex flex-wrap items-center justify-center xl:justify-start gap-x-6 md:gap-x-12 gap-y-6 md:gap-y-8">
               <Magnetic>
-                <a href="https://github.com/frankieokoth" target="_blank" rel="noreferrer" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
-                  <Github size={22} className="transition-colors" /> 
-                  <span className="relative overflow-hidden">
+                <a href="https://github.com/frankieokoth" target="_blank" rel="noreferrer" aria-label="GitHub" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
+                  <Github size={22} className="transition-colors" aria-hidden="true" /> 
+                  <span className="relative overflow-hidden" aria-hidden="true">
                     <span className="block transition-transform duration-300 group-hover:-translate-y-full">GitHub</span>
                     <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">GitHub</span>
                   </span>
                 </a>
               </Magnetic>
               <Magnetic>
-                <a href="https://linkedin.com/in/franklin-p-okoth/" target="_blank" rel="noreferrer" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
-                  <Linkedin size={22} className="transition-colors" /> 
-                  <span className="relative overflow-hidden">
+                <a href="https://linkedin.com/in/franklin-p-okoth/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
+                  <Linkedin size={22} className="transition-colors" aria-hidden="true" /> 
+                  <span className="relative overflow-hidden" aria-hidden="true">
                     <span className="block transition-transform duration-300 group-hover:-translate-y-full">LinkedIn</span>
                     <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">LinkedIn</span>
                   </span>
                 </a>
               </Magnetic>
               <Magnetic>
-                <a href="#" target="_blank" rel="noreferrer" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
-                  <Twitter size={22} className="transition-colors" /> 
-                  <span className="relative overflow-hidden">
+                <a href="#" target="_blank" rel="noreferrer" aria-label="Twitter" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
+                  <Twitter size={22} className="transition-colors" aria-hidden="true" /> 
+                  <span className="relative overflow-hidden" aria-hidden="true">
                     <span className="block transition-transform duration-300 group-hover:-translate-y-full">X (Twitter)</span>
                     <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">X (Twitter)</span>
                   </span>
                 </a>
               </Magnetic>
               <Magnetic>
-                <a href="#" target="_blank" rel="noreferrer" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
-                  <Instagram size={22} className="transition-colors" /> 
-                  <span className="relative overflow-hidden">
+                <a href="#" target="_blank" rel="noreferrer" aria-label="Instagram" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
+                  <Instagram size={22} className="transition-colors" aria-hidden="true" /> 
+                  <span className="relative overflow-hidden" aria-hidden="true">
                     <span className="block transition-transform duration-300 group-hover:-translate-y-full">Instagram</span>
                     <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">Instagram</span>
                   </span>
                 </a>
               </Magnetic>
               <Magnetic>
-                <a href="mailto:frankieokoth99@gmail.com" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
-                  <Mail size={22} className="transition-colors" /> 
-                  <span className="relative overflow-hidden">
+                <a href="mailto:frankieokoth99@gmail.com" aria-label="Email" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
+                  <Mail size={22} className="transition-colors" aria-hidden="true" /> 
+                  <span className="relative overflow-hidden" aria-hidden="true">
                     <span className="block transition-transform duration-300 group-hover:-translate-y-full">Email</span>
                     <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">Email</span>
                   </span>
