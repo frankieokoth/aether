@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowUpRight, Github } from 'lucide-react';
 import { transition } from '../shared/animations';
+import { Magnetic } from '../shared/Magnetic';
 import { projects, type Project } from '../../data/projects';
 
 function ProjectCard({ p, i, containerRef }: { p: Project, i: number, containerRef: React.RefObject<HTMLDivElement | null> }) {
@@ -69,27 +70,31 @@ function ProjectCard({ p, i, containerRef }: { p: Project, i: number, containerR
               
               <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-4 w-full md:w-auto mt-2 md:mt-0">
                 {p.githubLink && (
-                  <a 
-                    href={p.githubLink} 
-                    target="_blank" 
-                    rel="noreferrer" 
-                    className="inline-flex items-center justify-center gap-2 text-xs tracking-[0.2em] uppercase text-white/60 hover:text-white border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 px-4 py-3 md:py-2 rounded-full active:scale-[0.98] transition-all duration-300 font-light w-full md:w-auto"
-                  >
-                    <Github size={13} strokeWidth={1.5} />
-                    <span>Code</span>
-                  </a>
+                  <Magnetic>
+                    <a 
+                      href={p.githubLink} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="inline-flex items-center justify-center gap-2 text-xs tracking-[0.2em] uppercase text-white/60 hover:text-white border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 px-4 py-3 md:py-2 rounded-full active:scale-[0.98] transition-all duration-300 font-light w-full md:w-auto"
+                    >
+                      <Github size={13} strokeWidth={1.5} />
+                      <span>Code</span>
+                    </a>
+                  </Magnetic>
                 )}
                 
                 {p.liveLink && (
-                  <a 
-                    href={p.liveLink} 
-                    target="_blank" 
-                    rel="noreferrer" 
-                    className="inline-flex items-center justify-center gap-2 text-xs tracking-[0.2em] uppercase text-[#A3E635] hover:text-white border border-[#A3E635]/20 hover:border-[#A3E635]/40 bg-[#A3E635]/5 hover:bg-[#A3E635]/15 px-4 py-3 md:py-2 rounded-full active:scale-[0.98] transition-all duration-300 font-light w-full md:w-auto"
-                  >
-                    <span>Live</span>
-                    <ArrowUpRight size={13} strokeWidth={1.5} />
-                  </a>
+                  <Magnetic>
+                    <a 
+                      href={p.liveLink} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="inline-flex items-center justify-center gap-2 text-xs tracking-[0.2em] uppercase text-[#A3E635] hover:text-white border border-[#A3E635]/20 hover:border-[#A3E635]/40 bg-[#A3E635]/5 hover:bg-[#A3E635]/15 px-4 py-3 md:py-2 rounded-full active:scale-[0.98] transition-all duration-300 font-light w-full md:w-auto"
+                    >
+                      <span>Live</span>
+                      <ArrowUpRight size={13} strokeWidth={1.5} />
+                    </a>
+                  </Magnetic>
                 )}
               </div>
             </div>
