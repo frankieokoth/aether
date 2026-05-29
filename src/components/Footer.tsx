@@ -35,21 +35,6 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
         className="relative w-full border-t border-white/10 bg-[#050014]/30 backdrop-blur-2xl pt-24 md:pt-48 pb-16 px-6 md:px-16"
         style={{ y }}
       >
-        {/* Infinite Brutalist Marquee */}
-        <div className="absolute top-0 left-0 w-full overflow-hidden py-4 pointer-events-none select-none border-b border-white/5">
-          <motion.div 
-            animate={{ x: ["0%", "-50%"] }} 
-            transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
-            className="flex w-max"
-          >
-            {[...Array(4)].map((_, i) => (
-              <span key={i} className="text-5xl md:text-7xl font-black tracking-[0.2em] text-white/10 uppercase px-8 whitespace-nowrap">
-                LET'S BUILD SOMETHING EXTRAORDINARY — FRANKIE OKOTH — OPEN FOR OPPORTUNITIES —
-              </span>
-            ))}
-          </motion.div>
-        </div>
-
         <div className="max-w-7xl mx-auto relative z-10">
           
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-32 gap-12 md:gap-24">
