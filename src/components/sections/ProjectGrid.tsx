@@ -73,7 +73,7 @@ function ProjectCard({ p, i, containerRef }: { p: Project, i: number, containerR
                     href={p.githubLink} 
                     target="_blank" 
                     rel="noreferrer" 
-                    className="inline-flex items-center justify-center gap-2 text-xs tracking-[0.2em] uppercase text-white/60 hover:text-white border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 px-4 py-3 md:py-2 rounded-full transition-all duration-300 font-light w-full md:w-auto"
+                    className="inline-flex items-center justify-center gap-2 text-xs tracking-[0.2em] uppercase text-white/60 hover:text-white border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 px-4 py-3 md:py-2 rounded-full active:scale-[0.98] transition-all duration-300 font-light w-full md:w-auto"
                   >
                     <Github size={13} strokeWidth={1.5} />
                     <span>Code</span>
@@ -85,7 +85,7 @@ function ProjectCard({ p, i, containerRef }: { p: Project, i: number, containerR
                     href={p.liveLink} 
                     target="_blank" 
                     rel="noreferrer" 
-                    className="inline-flex items-center justify-center gap-2 text-xs tracking-[0.2em] uppercase text-[#A3E635] hover:text-white border border-[#A3E635]/20 hover:border-[#A3E635]/40 bg-[#A3E635]/5 hover:bg-[#A3E635]/15 px-4 py-3 md:py-2 rounded-full transition-all duration-300 font-light w-full md:w-auto"
+                    className="inline-flex items-center justify-center gap-2 text-xs tracking-[0.2em] uppercase text-[#A3E635] hover:text-white border border-[#A3E635]/20 hover:border-[#A3E635]/40 bg-[#A3E635]/5 hover:bg-[#A3E635]/15 px-4 py-3 md:py-2 rounded-full active:scale-[0.98] transition-all duration-300 font-light w-full md:w-auto"
                   >
                     <span>Live</span>
                     <ArrowUpRight size={13} strokeWidth={1.5} />
