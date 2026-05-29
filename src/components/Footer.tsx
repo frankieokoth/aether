@@ -43,7 +43,7 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
             className="flex w-max"
           >
             {[...Array(4)].map((_, i) => (
-              <span key={i} className="text-4xl md:text-5xl font-black tracking-[0.2em] text-white/[0.03] uppercase px-8 whitespace-nowrap">
+              <span key={i} className="text-5xl md:text-7xl font-black tracking-[0.2em] text-white/10 uppercase px-8 whitespace-nowrap">
                 LET'S BUILD SOMETHING EXTRAORDINARY — FRANKIE OKOTH — OPEN FOR OPPORTUNITIES —
               </span>
             ))}
