@@ -34,7 +34,7 @@ export function Intro() {
       >
         <motion.h1 variants={item} className="text-4xl md:text-7xl lg:text-8xl font-light tracking-tighter mb-8 leading-[1.1]">
           Frankie <br />
-          <span className="font-medium text-white/90">Okoth<span className="text-[#A3E635] drop-shadow-[0_0_12px_rgba(163,230,53,0.6)] animate-pulse">.</span></span>
+          <span className="font-medium text-white/90">Okoth.</span>
         </motion.h1>
         
         <motion.div variants={item} className="flex flex-col gap-6">
