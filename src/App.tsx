@@ -86,7 +86,7 @@ export default function App() {
           className="absolute top-0 left-0 right-0 h-[2px] bg-[#A3E635] origin-left z-[60]"
         />
         
-        <div className="max-w-7xl mx-auto px-6 md:px-16 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 md:px-16 h-16 md:h-20 flex items-center justify-between pt-[env(safe-area-inset-top)]">
           <button 
             onClick={() => {
               setView('HOME');
@@ -113,7 +113,7 @@ export default function App() {
         </div>
       </motion.header>
 
-      <main ref={mainScrollContainerRef} className="relative z-10 h-screen overflow-y-auto overflow-x-hidden scroll-smooth pointer-events-auto pt-20" id="main-scroll-container">
+      <main ref={mainScrollContainerRef} className="relative z-10 h-screen overflow-y-auto overflow-x-hidden scroll-smooth pointer-events-auto pt-16 md:pt-20" id="main-scroll-container">
         <div className="pb-32">
           <section id="home" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
             <Intro />

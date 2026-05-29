@@ -77,7 +77,7 @@ export function Navbar() {
 
       {/* Mobile Hamburger — Custom Animated Bars */}
       <button
-        className="md:hidden relative w-10 h-10 flex flex-col items-center justify-center gap-[7px] z-[110]"
+        className="md:hidden relative w-11 h-11 flex flex-col items-center justify-center gap-[7px] z-[110]"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle navigation menu"
       >
