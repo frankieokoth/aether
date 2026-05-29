@@ -18,27 +18,27 @@ export function Intro() {
   };
 
   const item = {
-    hidden: { opacity: 0, y: 20, scale: 0.98 },
-    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const } }
+    hidden: { opacity: 0, y: 40, clipPath: 'inset(100% 0 0 0)' },
+    show: { opacity: 1, y: 0, clipPath: 'inset(0% 0 0 0)', transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] as const } }
   };
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full min-h-screen flex items-center pt-20 pb-32">
 
       <motion.div
         variants={container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="w-full max-w-5xl mx-auto px-8 md:px-12 relative z-10"
+        className="w-full max-w-7xl mx-auto px-6 md:px-16 relative z-10"
       >
-        <motion.h1 variants={item} className="text-4xl md:text-7xl font-light tracking-tight mb-8 leading-[1.1]">
+        <motion.h1 variants={item} className="text-4xl md:text-7xl lg:text-8xl font-light tracking-tighter mb-8 leading-[1.1]">
           Frankie <br />
-          <span className="font-medium text-white/90">Okoth.</span>
+          <span className="font-medium text-white/90">Okoth<span className="text-[#A3E635] drop-shadow-[0_0_12px_rgba(163,230,53,0.6)] animate-pulse">.</span></span>
         </motion.h1>
         
         <motion.div variants={item} className="flex flex-col gap-6">
-          <div className="border-l border-[#8B5CF6]/30 pl-5 py-1">
+          <div className="border-l border-[#A3E635]/30 pl-5 py-1">
             <p className="text-white/60 text-sm md:text-base tracking-widest uppercase max-w-xl leading-relaxed mb-2">
               Software Engineer
             </p>
