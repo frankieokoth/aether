@@ -37,7 +37,7 @@ export function About() {
               systems and <span className="italic text-white/70">immersive</span> realities.
             </motion.h2>
 
-            <div className="flex flex-col gap-6 max-w-3xl mt-4 mx-auto text-justify">
+            <div className="flex flex-col gap-6 max-w-3xl mt-4 mx-auto text-left md:text-justify">
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

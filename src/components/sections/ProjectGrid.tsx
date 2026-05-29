@@ -70,7 +70,7 @@ function ProjectCard({ p, i, containerRef }: { p: Project, i: number, containerR
               
               <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-4 w-full md:w-auto mt-2 md:mt-0">
                 {p.githubLink && (
-                  <Magnetic>
+                  <Magnetic className="w-full md:w-auto md:inline-block">
                     <a 
                       href={p.githubLink} 
                       target="_blank" 
@@ -84,7 +84,7 @@ function ProjectCard({ p, i, containerRef }: { p: Project, i: number, containerR
                 )}
                 
                 {p.liveLink && (
-                  <Magnetic>
+                  <Magnetic className="w-full md:w-auto md:inline-block">
                     <a 
                       href={p.liveLink} 
                       target="_blank" 
