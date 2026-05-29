@@ -10,7 +10,7 @@ export function Skills() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={transitionProps}
-      className="w-full max-w-7xl mx-auto px-8 md:px-16 flex flex-col gap-16 md:gap-24"
+      className="w-full max-w-7xl mx-auto px-6 md:px-16 flex flex-col gap-16 md:gap-24"
     >
       {/* Header */}
       <div className="w-full flex flex-col gap-12 items-center text-center">
@@ -57,12 +57,12 @@ export function Skills() {
                   key={item} 
                   className="group relative flex items-center justify-between py-6 md:py-8 border-b border-white/[0.02] last:border-0 cursor-crosshair"
                 >
-                  <span className="text-3xl md:text-5xl font-light tracking-tight text-white/30 group-hover:text-white transition-colors duration-500">
+                  <span className="text-3xl md:text-5xl font-light tracking-tight text-white/70 md:text-white/30 md:group-hover:text-white active:text-white transition-colors duration-500">
                     {item}
                   </span>
                   
                   {/* Cinematic Readout Tag */}
-                  <div className="opacity-0 group-hover:opacity-100 -translate-x-8 group-hover:translate-x-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-center gap-4">
+                  <div className="hidden md:flex opacity-0 group-hover:opacity-100 -translate-x-8 group-hover:translate-x-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] items-center gap-4">
                     <span className="text-[10px] tracking-[0.2em] text-[#A3E635] font-mono uppercase hidden md:block">
                       System.Active
                     </span>
