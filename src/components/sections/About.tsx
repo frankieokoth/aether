@@ -5,13 +5,13 @@ export function About() {
   const transitionProps = { duration: 1, ease: [0.22, 1, 0.36, 1] as const };
 
   return (
-    <div className="relative w-full py-32">
+    <div className="relative w-full py-16 md:py-32">
       <motion.div
         initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
         whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
         viewport={{ once: true, margin: "-100px" }}
         transition={transition}
-        className="w-full max-w-7xl mx-auto px-8 md:px-16"
+        className="w-full max-w-7xl mx-auto px-6 md:px-16"
       >
         <div className="flex flex-col gap-16 items-center">
           
