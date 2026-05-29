@@ -21,7 +21,7 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
   }, []);
 
   return (
-    <div id="contact" className="relative overflow-hidden w-full mt-32 z-20 scroll-mt-20">
+    <div id="contact" className="relative overflow-hidden w-full mt-16 md:mt-32 z-20 scroll-mt-20">
       <motion.footer 
         ref={containerRef}
         className="relative w-full border-t border-white/10 bg-[#050014]/30 backdrop-blur-2xl pt-24 md:pt-48 pb-16 px-6 md:px-16"
@@ -47,7 +47,7 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
               </div>
             </div>
 
-            <div className="flex flex-col items-start md:items-end gap-2 text-right">
+            <div className="flex flex-col items-start md:items-end gap-2 text-left md:text-right">
               <span className="text-[10px] tracking-[0.3em] uppercase text-white/30 mb-2">Local Time</span>
               <div className="font-mono text-xl tracking-widest text-white/80 tabular-nums">
                 {time.toLocaleTimeString('en-US', { hour12: false, timeZoneName: 'short' })}
@@ -62,7 +62,7 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
           <div className="w-full h-[1px] bg-gradient-to-r from-white/10 via-white/5 to-transparent mb-16" />
 
           <div className="flex flex-col xl:flex-row justify-between items-center gap-16">
-            <div className="flex flex-wrap items-center justify-center xl:justify-start gap-x-12 gap-y-8">
+            <div className="flex flex-wrap items-center justify-center xl:justify-start gap-x-6 md:gap-x-12 gap-y-6 md:gap-y-8">
               <Magnetic>
                 <a href="https://github.com/frankieokoth" target="_blank" rel="noreferrer" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
                   <Github size={22} className="transition-colors" /> 
@@ -112,7 +112,7 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
 
             <div className="flex flex-col xl:flex-row items-center gap-12 mt-8 xl:mt-0">
               <div className="flex flex-col items-center xl:items-end gap-1">
-                <span className="text-2xl md:text-3xl font-light text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 tracking-wide">
+                <span className="text-lg md:text-3xl font-light text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 tracking-wide">
                   © {new Date().getFullYear()} Frankie Okoth.
                 </span>
                 <span className="text-[11px] font-light tracking-[0.25em] text-white/60 uppercase">
