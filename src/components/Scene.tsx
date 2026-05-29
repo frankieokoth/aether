@@ -15,6 +15,7 @@ const vertexShader = `
 uniform float uTime;
 uniform vec2 uMouse;
 uniform float uReducedMotion;
+uniform float uPixelRatio;
 
 attribute float randomFactor;
 attribute vec3 color;
@@ -52,11 +53,11 @@ void main() {
     gl_Position = projectionMatrix * mvPosition;
     
     // Size attenuation
-    gl_PointSize = 25.0 * (1.0 / -mvPosition.z);
+    gl_PointSize = 25.0 * uPixelRatio * (1.0 / -mvPosition.z);
   } else {
     vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
     gl_Position = projectionMatrix * mvPosition;
-    gl_PointSize = 25.0 * (1.0 / -mvPosition.z);
+    gl_PointSize = 25.0 * uPixelRatio * (1.0 / -mvPosition.z);
   }
   
   // Twinkle
@@ -108,7 +109,8 @@ function Particles() {
   const uniforms = useMemo(() => ({
     uTime: { value: 0 },
     uMouse: { value: new THREE.Vector2(-999, -999) },
-    uReducedMotion: { value: 0.0 }
+    uReducedMotion: { value: 0.0 },
+    uPixelRatio: { value: Math.min(window.devicePixelRatio || 1, 1.5) }
   }), []);
 
   const { positions, randomFactors, colors } = useMemo(() => {
@@ -189,7 +191,7 @@ function Particles() {
 export default function Scene() {
   return (
     <div className="scene-wrapper fixed inset-0 z-0 bg-[#050014]">
-      <Canvas camera={{ position: [0, 0, 10], fov: 60 }}>
+      <Canvas camera={{ position: [0, 0, 10], fov: 60 }} dpr={[1, 1.5]}>
         <fog attach="fog" args={['#050014', 5, 20]} />
         <Particles />
       </Canvas>
