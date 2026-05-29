@@ -39,10 +39,10 @@ export function Intro() {
         
         <motion.div variants={item} className="flex flex-col gap-6">
           <div className="border-l border-[#A3E635]/30 pl-5 py-1">
-            <p className="text-white/60 text-sm md:text-base tracking-widest uppercase max-w-xl leading-relaxed mb-2">
+            <p className="text-white/90 text-xl md:text-2xl font-light max-w-xl leading-relaxed mb-2">
               Software Engineer
             </p>
-            <p className="text-white/30 text-xs tracking-[0.2em] uppercase">
+            <p className="text-white/60 text-base md:text-lg font-light">
               AI, Spatial Computing &amp; Future Systems
             </p>
           </div>
