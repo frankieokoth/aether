@@ -30,7 +30,7 @@ export function Intro() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="w-full max-w-7xl mx-auto px-6 md:px-16 relative z-10"
+        className="w-full max-w-5xl mx-auto px-8 md:px-12 relative z-10"
       >
         <motion.h1 variants={item} className="text-4xl md:text-7xl lg:text-8xl font-light tracking-tighter mb-8 leading-[1.1]">
           Frankie <br />
