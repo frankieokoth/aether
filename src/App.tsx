@@ -36,6 +36,9 @@ export default function App() {
   }, [setIsScrolled]);
 
   useEffect(() => {
+    const container = mainScrollContainerRef.current;
+    if (!container) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -44,7 +47,7 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.3 }
+      { root: container, threshold: 0.3 }
     );
 
     const sections = ['home', 'about', 'work', 'stack', 'contact'];
