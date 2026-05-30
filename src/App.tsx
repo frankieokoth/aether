@@ -92,9 +92,17 @@ export default function App() {
               setView('HOME');
               document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className={`text-xl font-light capitalize transition-colors duration-300 px-2 ${view === 'HOME' ? 'text-white' : 'text-white/50 hover:text-white/80'}`}
+            className={`relative text-xl font-light capitalize transition-colors duration-300 px-2 ${view === 'HOME' ? 'text-white' : 'text-white/50 hover:text-white/80'}`}
           >
             Home
+            {view === 'HOME' && (
+              <motion.div
+                layoutId="activeNavIndicator"
+                className="absolute -bottom-1 left-0 right-0 h-[1px] bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+                initial={false}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+            )}
           </button>
 
           <div className="flex items-center gap-4 md:gap-10">
