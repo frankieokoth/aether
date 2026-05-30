@@ -47,7 +47,7 @@ export default function App() {
           }
         });
       },
-      { root: container, threshold: 0.3 }
+      { root: container, rootMargin: "-30% 0px -30% 0px", threshold: 0 }
     );
 
     const sections = ['home', 'about', 'work', 'stack', 'contact'];
