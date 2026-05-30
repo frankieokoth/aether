@@ -27,37 +27,31 @@ export default function App() {
     const container = mainScrollContainerRef.current;
     if (!container) return;
     
+    const sections = ['home', 'about', 'work', 'stack', 'contact'];
+    
     const handleScroll = () => {
+      // 1. Update nav blur state
       setIsScrolled(container.scrollTop > 50);
+      
+      // 2. Track active section (Trigger point is 30% down the screen)
+      const triggerPoint = container.scrollTop + container.clientHeight * 0.3;
+      
+      // Loop backwards to find the deepest section we've scrolled past
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.offsetTop <= triggerPoint) {
+          setView(sections[i].toUpperCase());
+          break;
+        }
+      }
     };
     
     container.addEventListener('scroll', handleScroll, { passive: true });
+    // Run once to initialize
+    handleScroll();
+    
     return () => container.removeEventListener('scroll', handleScroll);
-  }, [setIsScrolled]);
-
-  useEffect(() => {
-    const container = mainScrollContainerRef.current;
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setView(entry.target.id.toUpperCase());
-          }
-        });
-      },
-      { root: container, rootMargin: "-30% 0px -30% 0px", threshold: 0 }
-    );
-
-    const sections = ['home', 'about', 'work', 'stack', 'contact'];
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, [setView]);
+  }, [setIsScrolled, setView]);
 
   return (
     <div className="relative min-h-screen bg-[#050014] text-white overflow-hidden font-sans selection:bg-[#8B5CF6] selection:text-white">
