@@ -88,7 +88,7 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
                 </a>
               </Magnetic>
               <Magnetic>
-                <a href="#" target="_blank" rel="noreferrer" aria-label="Twitter" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
+                <a href="https://x.com/frankie_okoth" target="_blank" rel="noreferrer" aria-label="Twitter" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
                   <Twitter size={22} className="transition-colors" aria-hidden="true" /> 
                   <span className="relative overflow-hidden" aria-hidden="true">
                     <span className="block transition-transform duration-300 group-hover:-translate-y-full">X (Twitter)</span>
@@ -97,7 +97,7 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
                 </a>
               </Magnetic>
               <Magnetic>
-                <a href="#" target="_blank" rel="noreferrer" aria-label="Instagram" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
+                <a href="https://instagram.com/frankie_okoth/" target="_blank" rel="noreferrer" aria-label="Instagram" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
                   <Instagram size={22} className="transition-colors" aria-hidden="true" /> 
                   <span className="relative overflow-hidden" aria-hidden="true">
                     <span className="block transition-transform duration-300 group-hover:-translate-y-full">Instagram</span>

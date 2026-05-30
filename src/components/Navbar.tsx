@@ -19,7 +19,7 @@ export function Navbar() {
   const socials = [
     { href: 'https://github.com/frankieokoth', icon: Github, label: 'GitHub' },
     { href: 'https://linkedin.com/in/franklin-p-okoth/', icon: Linkedin, label: 'LinkedIn' },
-    { href: '#', icon: Twitter, label: 'X' },
+    { href: 'https://x.com/frankie_okoth', icon: Twitter, label: 'X' },
   ];
 
   // Lock the actual scroll container when menu is open
