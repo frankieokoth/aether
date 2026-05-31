@@ -54,9 +54,9 @@ export function Intro() {
             initial={{ opacity: 0, scale: 0.95, y: 40 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="w-fit max-w-[90%] md:max-w-[50%] lg:max-w-[45%] relative border border-white/10 p-2 bg-white/5 backdrop-blur-sm group z-10 flex-shrink-0"
+            className="w-fit max-w-[90%] md:max-w-[50%] lg:max-w-[45%] relative border border-white/5 p-2 bg-white/[0.02] backdrop-blur-xl group z-10 flex-shrink-0 rounded-2xl"
           >
-            <div className="relative overflow-hidden flex justify-center w-full h-full">
+            <div className="relative overflow-hidden flex justify-center w-full h-full rounded-xl">
               <div className="absolute inset-0 bg-[#050014] opacity-30 z-10 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-10 pointer-events-none"></div>
               <img 
                 src="/profile.jpeg" 
@@ -64,15 +64,15 @@ export function Intro() {
                 className="block w-auto h-auto max-h-[75vh] max-w-full object-contain grayscale contrast-125 transition-transform duration-1000 ease-out relative z-0"
               />
               
-              {/* Technical Readout */}
-              <div className="absolute top-4 right-4 z-20 flex flex-col items-end gap-1">
-                <span className="text-[8px] font-mono text-white/50 tracking-widest leading-none">V.2.0</span>
-                <span className="text-[8px] font-mono text-[#A3E635] tracking-widest leading-none border border-[#A3E635]/30 px-1 py-0.5 bg-[#050014]/50 backdrop-blur-md">ONLINE</span>
-              </div>
+              {/* Analog Film Grain */}
+              <div 
+                className="absolute inset-0 z-20 opacity-[0.15] mix-blend-overlay pointer-events-none" 
+                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
+              ></div>
+              
             </div>
-            
             {/* Structural accent */}
-            <div className="absolute -bottom-2 -left-2 w-12 h-12 border-b border-l border-[#A3E635]/50 z-0"></div>
+            <div className="absolute -bottom-2 -left-2 w-12 h-12 border-b border-l border-[#A3E635]/50 z-0 pointer-events-none"></div>
           </motion.div>
 
         </div>
