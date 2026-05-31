@@ -17,36 +17,65 @@ export function Intro() {
     }
   };
 
-  const item = {
-    hidden: { opacity: 0, y: 40, clipPath: 'inset(100% -20% 0 -20%)' },
-    show: { opacity: 1, y: 0, clipPath: 'inset(-20% -20% -20% -20%)', transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] as const } }
-  };
-
   return (
-    <div className="relative w-full">
-
+    <div className="relative w-full flex items-center justify-center">
       <motion.div
         variants={container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="w-full max-w-5xl mx-auto px-8 md:px-12 relative z-10 -translate-y-8 md:-translate-y-12"
+        className="w-full max-w-7xl mx-auto px-6 md:px-16 relative z-10 -mt-20 md:-mt-32"
       >
-        <motion.h1 variants={item} className="text-4xl md:text-7xl lg:text-8xl font-light tracking-tighter mb-8 leading-[1.1]">
-          Frankie <br />
-          <span className="font-medium text-white/90">Okoth.</span>
-        </motion.h1>
-        
-        <motion.div variants={item} className="flex flex-col gap-6">
-          <div className="border-l border-[#A3E635]/30 pl-5 py-1">
-            <p className="text-white/90 text-xl md:text-2xl font-light max-w-xl leading-relaxed mb-2">
-              Software Engineer
-            </p>
-            <p className="text-white/60 text-base md:text-lg font-light">
-              AI, Spatial Computing &amp; Future Systems
-            </p>
-          </div>
-        </motion.div>
+        <div className="flex flex-col md:flex-row items-center md:items-stretch justify-between gap-12 md:gap-8">
+          
+          {/* Left Column: Typography */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col items-start justify-center flex-1 w-full mt-12 md:mt-0 z-20"
+          >
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/70 leading-[1.0] mb-6 -ml-1">
+              Frankie<br/>Okoth<span className="text-white">.</span>
+            </h1>
+            
+            <div className="flex flex-col gap-3 md:gap-4 mt-2">
+              <p className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight text-white/90">
+                Software Engineer.
+              </p>
+              <p className="text-base md:text-lg font-light leading-relaxed text-white/60 max-w-md">
+                Architecting high-performance backend systems, AI integrations, and spatial computing interfaces. Building reliable, uncompromising software.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Right Column: Option B - Massive Portrait */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95, y: 40 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.5, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full md:w-[45%] lg:w-[40%] h-[50vh] md:h-[65vh] max-h-[700px] relative border border-white/10 p-2 bg-white/5 backdrop-blur-sm group z-10"
+          >
+            <div className="w-full h-full relative overflow-hidden">
+              <div className="absolute inset-0 bg-[#050014] opacity-30 z-10 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-10"></div>
+              <img 
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop&grayscale=true" 
+                alt="System Portrait" 
+                className="w-full h-full object-cover filter contrast-125 brightness-[0.85] sepia-[.1] hue-rotate-[80deg] scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out"
+              />
+              
+              {/* Technical Readout */}
+              <div className="absolute top-4 right-4 z-20 flex flex-col items-end gap-1">
+                <span className="text-[8px] font-mono text-white/50 tracking-widest leading-none">V.2.0</span>
+                <span className="text-[8px] font-mono text-[#A3E635] tracking-widest leading-none border border-[#A3E635]/30 px-1 py-0.5 bg-[#050014]/50 backdrop-blur-md">ONLINE</span>
+              </div>
+            </div>
+            
+            {/* Structural accent */}
+            <div className="absolute -bottom-2 -left-2 w-12 h-12 border-b border-l border-[#A3E635]/50 z-0"></div>
+          </motion.div>
+
+        </div>
       </motion.div>
     </div>
   );

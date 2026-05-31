@@ -109,7 +109,7 @@ export default function App() {
 
       <main ref={mainScrollContainerRef} className="relative z-10 h-screen overflow-y-auto overflow-x-hidden scroll-smooth pointer-events-auto pt-16 md:pt-20" id="main-scroll-container">
         <div className="pb-32">
-          <section id="home" className="min-h-screen flex flex-col justify-center py-32 md:py-48 scroll-mt-20">
+          <section id="home" className="min-h-screen flex flex-col justify-center scroll-mt-20 relative pt-20">
             <Intro />
           </section>
           
