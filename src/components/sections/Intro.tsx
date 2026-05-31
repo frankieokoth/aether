@@ -26,14 +26,14 @@ export function Intro() {
         viewport={{ once: true, margin: "-100px" }}
         className="w-full max-w-7xl mx-auto px-6 md:px-16 relative z-10 -mt-20 md:-mt-32"
       >
-        <div className="flex flex-col md:flex-row items-center md:items-stretch justify-between gap-12 md:gap-8">
+        <div className="flex flex-col md:flex-row items-center md:items-center justify-center gap-16 md:gap-24 lg:gap-40 w-full">
           
           {/* Left Column: Typography */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-start justify-center flex-1 w-full mt-12 md:mt-0 z-20"
+            className="flex flex-col items-start justify-center mt-12 md:mt-0 z-20 shrink-0"
           >
             <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/70 leading-[1.0] mb-6 -ml-1">
               Frankie<br/>Okoth<span className="text-white">.</span>
@@ -54,14 +54,14 @@ export function Intro() {
             initial={{ opacity: 0, scale: 0.95, y: 40 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full md:w-[45%] lg:w-[40%] h-[50vh] md:h-[65vh] max-h-[700px] relative border border-white/10 p-2 bg-white/5 backdrop-blur-sm group z-10"
+            className="w-fit max-w-[90%] md:max-w-[50%] lg:max-w-[45%] relative border border-white/10 p-2 bg-white/5 backdrop-blur-sm group z-10 flex-shrink-0"
           >
-            <div className="w-full h-full relative overflow-hidden">
-              <div className="absolute inset-0 bg-[#050014] opacity-30 z-10 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-10"></div>
+            <div className="relative overflow-hidden flex justify-center w-full h-full">
+              <div className="absolute inset-0 bg-[#050014] opacity-30 z-10 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-10 pointer-events-none"></div>
               <img 
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop&grayscale=true" 
-                alt="System Portrait" 
-                className="w-full h-full object-cover filter contrast-125 brightness-[0.85] sepia-[.1] hue-rotate-[80deg] scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out"
+                src="/profile.jpeg" 
+                alt="Frankie Okoth - System Architect" 
+                className="block w-auto h-auto max-h-[75vh] max-w-full object-contain grayscale contrast-125 transition-transform duration-1000 ease-out relative z-0"
               />
               
               {/* Technical Readout */}
