@@ -27,16 +27,14 @@ export function Intro() {
     }
   };
 
-  const crtSnap = {
-    hidden: { opacity: 0, clipPath: 'inset(50% 0 50% 0)', scale: 1.1, filter: "brightness(2) blur(10px)" },
+  const slowDrift = {
+    hidden: { opacity: 0, scale: 1.05 },
     show: { 
       opacity: 1, 
-      clipPath: 'inset(0% 0 0% 0)', 
       scale: 1,
-      filter: "brightness(1) blur(0px)",
       transition: { 
-        duration: 1.2, 
-        ease: [0.87, 0, 0.13, 1] as const,
+        duration: 2.0, 
+        ease: [0.16, 1, 0.3, 1] as const,
         delay: 0.6
       } 
     }
@@ -109,7 +107,7 @@ export function Intro() {
 
           {/* Right Column: Massive Portrait */}
           <motion.div 
-            variants={crtSnap}
+            variants={slowDrift}
             className="w-fit max-w-[90%] md:max-w-[50%] lg:max-w-[45%] relative border border-white/5 p-2 bg-white/[0.02] backdrop-blur-xl group z-10 flex-shrink-0 rounded-2xl"
           >
             <div className="relative overflow-hidden flex justify-center w-full h-full rounded-xl">
