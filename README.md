@@ -1,63 +1,131 @@
 <div align="center">
-  <br />
-  <h1>A E T H E R</h1>
-  <p>
-    <strong>High-performance spatial computing interface & portfolio architecture.</strong>
-  </p>
-  <br />
+
+# A E T H E R
+
+**An experiment in spatial computing, immersive interaction, and architectural software design.**
+
 </div>
+
+---
 
 ## The Vision
 
-Most backend engineers view the interface as an afterthought. **Aether** was engineered to challenge that standard. It serves as a personal portfolio, but its true purpose is to demonstrate that uncompromising backend architecture and high-end spatial design are not mutually exclusive.
+Modern software often treats the interface as a presentation layer rather than a core component of the system itself.
+
+**Aether** was engineered to challenge that assumption. It serves as a personal portfolio, but its true purpose is to demonstrate that uncompromising software architecture and high-end spatial design are not mutually exclusive.
 
 It is built on a design language of **Ethereal Brutalism**—stripping away visual noise to focus entirely on typography, space, and hardware-accelerated kinematics.
 
+---
+
 ## The Architecture
 
-The project is built on a tightly constrained, modern stack designed for absolute fluidity and high-performance spatial rendering:
+The project is built on a tightly constrained modern stack designed for fluid interaction and high-performance spatial rendering:
 
-- **Core Engine:** React 19 / TypeScript / Vite
-- **Spatial Matrix (WebGL):** Three.js / React Three Fiber (`@react-three/fiber`) / Drei (`@react-three/drei`)
-- **Kinematics:** Framer Motion v12 (`motion`)
-- **Styling Architecture:** Tailwind CSS v4 / `clsx` / `tailwind-merge`
-- **Iconography:** Lucide React
+* **Core Engine:** React 19 / TypeScript / Vite
+* **Spatial Matrix (WebGL):** Three.js / React Three Fiber (`@react-three/fiber`) / Drei (`@react-three/drei`)
+* **Kinematics:** Framer Motion v12 (`motion`)
+* **Styling Architecture:** Tailwind CSS v4 / `clsx` / `tailwind-merge`
+* **State Orchestration:** Zustand
+* **Iconography:** Lucide React
+
+---
 
 ## The Design Language
 
 Aether rejects generic templates. The aesthetic is driven by three core pillars:
 
-1. **Absolute Minimalism:** If an element does not serve a structural or interactive purpose, it is removed.
-2. **Mechanical Physics:** Animations do not just fade; they snap, spring, and drift with physical weight and intent.
-3. **High Contrast:** Deep crushed blacks (`#050014`) paired with pure white typography for maximum legibility and atmospheric depth.
+### 01. Absolute Minimalism
+
+If an element does not serve a structural or interactive purpose, it is removed.
+
+### 02. Mechanical Physics
+
+Animations do not simply fade; they snap, spring, and drift with physical weight and intent.
+
+### 03. High Contrast
+
+Deep crushed blacks (`#050014`) paired with pure white typography create maximum legibility and atmospheric depth.
+
+---
 
 ## Technical Documentation
 
 ### 01. File Architecture
-The project follows a strict module separation for maintainability and performance:
-- `/src/components/sections/`: Core layout modules (`Intro.tsx`, `About.tsx`, `ProjectGrid.tsx`).
-- `/src/components/shared/`: Reusable physics wrappers (`Magnetic.tsx`, `animations.ts`).
-- `/src/components/Scene.tsx`: The WebGL particle engine.
-- `/src/store/aether-store.ts`: Global Zustand state management.
+
+The project follows a strict modular separation to keep presentation, interaction, and rendering concerns isolated and maintainable.
+
+```text
+src/
+├── components/
+│   ├── sections/          # Intro.tsx, About.tsx, ProjectGrid.tsx
+│   ├── shared/            # Magnetic.tsx, animations.ts
+│   └── Scene.tsx          # WebGL particle environment
+├── store/
+│   └── aether-store.ts    # Zustand state orchestration
+├── hooks/
+├── lib/
+└── assets/
+```
+
+---
 
 ### 02. Spatial Environment (WebGL)
-The background is a hardware-accelerated particle system built with `@react-three/fiber` and custom GLSL shaders.
-- **Vertex Shaders:** `Scene.tsx` computes mouse-repulsion physics (`uMouse`) and trigonometric drift (`sin(uTime * 0.35)`) directly on the GPU.
-- **Viewport Sync:** The 3D matrix automatically scales and rotates based on the active viewport (`HOME`, `ABOUT`, `WORK`), triggering camera kinematics based on Zustand state updates.
+
+The background is a hardware-accelerated particle system built with React Three Fiber and custom GLSL shaders.
+
+#### Vertex Processing
+
+`Scene.tsx` computes mouse-repulsion physics (`uMouse`) and trigonometric drift (`sin(uTime * 0.35)`) directly on the GPU.
+
+#### Viewport Synchronization
+
+The 3D environment scales and rotates based on the active viewport (`HOME`, `ABOUT`, `WORK`), allowing camera movement to remain synchronized with application state.
+
+---
 
 ### 03. State Management
-We utilize **Zustand** for zero-boilerplate global state orchestration.
-- `view`: Tracks the current section of the SPA to synchronize WebGL camera rotations with the DOM layout.
-- `isScrolled`: Monitors scroll triggers to dynamically adjust layout kinematics.
+
+Global state is orchestrated through Zustand.
+
+#### Core State Domains
+
+* `view` — Tracks the current section of the application and synchronizes camera orientation with the DOM.
+* `isScrolled` — Monitors scroll state and triggers dynamic layout adjustments.
+
+This architecture enables communication between the DOM layer and the WebGL environment while minimizing unnecessary renders.
+
+---
 
 ### 04. Kinematics (Framer Motion)
-Animations are not arbitrary CSS transitions; they are spring-loaded physics calculations.
-- **Typography Cascade:** Uses `staggerChildren: 0.1` and `type: "spring", stiffness: 120, damping: 14` for the mechanical text reveal in `Intro.tsx`.
-- **Mobile Clamping:** The Hero architecture enforces `min-h-[100svh]` and mathematically clamped typography (`text-[4rem]`) to guarantee 60fps performance and prevent viewport jumping on legacy mobile rendering engines.
+
+Animations are treated as spring-based physical systems rather than conventional CSS transitions.
+
+#### Typography Cascade
+
+```ts
+staggerChildren: 0.1
+type: "spring"
+stiffness: 120
+damping: 14
+```
+
+Used to create the staged mechanical text reveal within `Intro.tsx`.
+
+#### Mobile Clamping
+
+The hero architecture utilizes `min-h-[100svh]` and clamped typography to reduce viewport jumping and maintain fluid rendering performance across mobile devices.
+
+---
 
 ## Ignition Sequence
 
-This architecture is rigorously constrained. **Node.js v18+** is required for precise dependency resolution.
+### Prerequisites
+
+* Node.js v18+
+* npm
+
+### Installation
 
 ```bash
 # 01. Clone the repository
@@ -66,14 +134,25 @@ git clone https://github.com/frankieokoth/aether.git
 # 02. Navigate to the workspace
 cd aether
 
-# 03. Resolve core dependencies
+# 03. Resolve dependencies
 npm install
 
-# 04. Ignite the spatial environment
+# 04. Launch the environment
 npm run dev
 ```
 
-*The local development server will initialize at `http://localhost:3000`.*
+The local development server will initialize at:
+
+```text
+http://localhost:3000
+```
 
 ---
-*Designed and engineered by Frankie Okoth. Software Engineer.*
+
+## Author
+
+**Frankie Okoth**
+
+Software Engineer exploring the convergence of artificial intelligence, virtual reality, spatial computing, and immersive digital architectures.
+
+> *"The interface is not the surface of the system. It is the system experienced by a human being."*
