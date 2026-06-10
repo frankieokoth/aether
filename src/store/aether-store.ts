@@ -16,5 +16,5 @@ export const useAetherStore = create<AetherStore>((set) => ({
     if (newView === state.view) return state;
     return { prevView: state.view, view: newView };
   }),
-  setIsScrolled: (scrolled) => set({ isScrolled: scrolled }),
+  setIsScrolled: (scrolled) => set((state) => state.isScrolled === scrolled ? state : { isScrolled: scrolled }),
 }));
