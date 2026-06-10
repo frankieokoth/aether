@@ -96,7 +96,7 @@ export default function App() {
             
             <Magnetic>
               <a 
-                href="/resume.pdf" 
+                href="/frankie_okoth_resume.pdf" 
                 download 
                 className="group relative hidden md:flex items-center gap-4 bg-white/5 border border-white/10 backdrop-blur-md text-white px-6 py-2 rounded-full font-light hover:bg-white hover:text-black transition-all duration-500 overflow-hidden"
               >

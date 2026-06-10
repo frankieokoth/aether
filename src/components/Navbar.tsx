@@ -185,7 +185,7 @@ export function Navbar() {
 
                   {/* Resume CTA */}
                   <a
-                    href="/resume.pdf"
+                    href="/frankie_okoth_resume.pdf"
                     download
                     className="group flex items-center gap-3 text-sm tracking-[0.15em] uppercase text-white/50 hover:text-white transition-colors duration-300"
                   >
