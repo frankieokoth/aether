@@ -31,7 +31,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10px" }}
               transition={transitionProps}
-              className="text-3xl md:text-5xl lg:text-6xl font-light tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/50 leading-[1.1] max-w-4xl mx-auto text-center"
+              className="text-3xl md:text-5xl lg:text-6xl font-light tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/50 leading-[1.1] max-w-4xl mx-auto text-center py-2"
             >
               I engineer intelligent <br className="hidden md:block" />
               systems and <span className="italic text-white/70">immersive</span> realities.

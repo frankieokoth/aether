@@ -133,7 +133,7 @@ export function ProjectGrid() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10px" }}
           transition={transitionProps}
-          className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/50 leading-[1.1] max-w-4xl mx-auto"
+          className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/50 leading-[1.1] max-w-4xl mx-auto text-center py-2"
         >
           Architecting scale. <br className="hidden md:block" />
           Building what <span className="italic text-white/70">feels</span> right.
