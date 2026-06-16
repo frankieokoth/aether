@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'motion/react';
 import { useRef, useEffect, useState } from 'react';
 import { ArrowUpRight, Github, Linkedin, Mail, Instagram, Twitter, Download } from 'lucide-react';
 import { Magnetic } from './shared/Magnetic';
@@ -18,6 +18,52 @@ function LocalTimeDisplay() {
   );
 }
 
+// Physics Dock Item Component
+function DockItem({ mouseX, href, icon: Icon, label }: { mouseX: any, href: string, icon: any, label: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  
+  const distance = useTransform(mouseX, (val: number) => {
+    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
+    return val - bounds.x - bounds.width / 2;
+  });
+
+  // Base size 48px, max size 72px on hover
+  const widthSync = useTransform(distance, [-150, 0, 150], [48, 72, 48]);
+  const width = useSpring(widthSync, { mass: 0.1, stiffness: 200, damping: 15 });
+
+  return (
+    <motion.div ref={ref} style={{ width }} className="flex items-center justify-center aspect-square">
+      <motion.a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={label}
+        style={{ width, height: width }}
+        className="group relative flex items-center justify-center rounded-full border border-white/5 bg-white/5 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:bg-white/10 hover:border-white/20 transition-colors"
+      >
+        <motion.div style={{ scale: useTransform(width, [48, 72], [1, 1.5]) }}>
+          <Icon strokeWidth={1.5} className="text-white/50 group-hover:text-white transition-colors duration-300 w-5 h-5" />
+        </motion.div>
+      </motion.a>
+    </motion.div>
+  );
+}
+
+function XIcon(props: any) {
+  return (
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width={props.size || 24} 
+      height={props.size || 24} 
+      viewBox="0 0 24 24" 
+      fill="currentColor"
+      className={props.className}
+    >
+      <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+    </svg>
+  );
+}
+
 export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefObject<HTMLElement> }) {
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -27,6 +73,7 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [-150, 0]);
+  const mouseX = useMotionValue(Infinity);
 
   return (
     <div id="contact" className="relative overflow-hidden w-full mt-16 md:mt-32 z-20 scroll-mt-20">
@@ -68,43 +115,19 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
           <div className="w-full h-[1px] bg-gradient-to-r from-white/10 via-white/5 to-transparent mb-16" />
 
           <div className="flex flex-col lg:flex-row justify-between items-center gap-16">
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 md:gap-x-12 gap-y-6 md:gap-y-8">
-              <Magnetic>
-                <a href="https://github.com/frankieokoth" target="_blank" rel="noreferrer" aria-label="GitHub" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
-                  <Github size={22} className="transition-colors" aria-hidden="true" /> 
-                  <span className="relative overflow-hidden" aria-hidden="true">
-                    <span className="block transition-transform duration-300 group-hover:-translate-y-full">GitHub</span>
-                    <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">GitHub</span>
-                  </span>
-                </a>
-              </Magnetic>
-              <Magnetic>
-                <a href="https://linkedin.com/in/franklin-p-okoth/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
-                  <Linkedin size={22} className="transition-colors" aria-hidden="true" /> 
-                  <span className="relative overflow-hidden" aria-hidden="true">
-                    <span className="block transition-transform duration-300 group-hover:-translate-y-full">LinkedIn</span>
-                    <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">LinkedIn</span>
-                  </span>
-                </a>
-              </Magnetic>
-              <Magnetic>
-                <a href="https://x.com/frankie_okoth" target="_blank" rel="noreferrer" aria-label="Twitter" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
-                  <Twitter size={22} className="transition-colors" aria-hidden="true" /> 
-                  <span className="relative overflow-hidden" aria-hidden="true">
-                    <span className="block transition-transform duration-300 group-hover:-translate-y-full">X (Twitter)</span>
-                    <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">X (Twitter)</span>
-                  </span>
-                </a>
-              </Magnetic>
-              <Magnetic>
-                <a href="https://instagram.com/frankie_okoth/" target="_blank" rel="noreferrer" aria-label="Instagram" className="group flex items-center gap-3 text-base font-light text-white/70 hover:text-white transition-all capitalize hover:-translate-y-1">
-                  <Instagram size={22} className="transition-colors" aria-hidden="true" /> 
-                  <span className="relative overflow-hidden" aria-hidden="true">
-                    <span className="block transition-transform duration-300 group-hover:-translate-y-full">Instagram</span>
-                    <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-white">Instagram</span>
-                  </span>
-                </a>
-              </Magnetic>
+            
+            {/* Fluid Physics Dock */}
+            <div className="flex justify-center lg:justify-start w-full lg:w-auto">
+              <div 
+                onMouseMove={(e) => mouseX.set(e.clientX)}
+                onMouseLeave={() => mouseX.set(Infinity)}
+                className="flex items-center justify-center gap-3 h-[88px] px-4 w-max rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-3xl shadow-2xl"
+              >
+              <DockItem mouseX={mouseX} href="https://github.com/frankieokoth" icon={Github} label="GitHub" />
+              <DockItem mouseX={mouseX} href="https://linkedin.com/in/franklin-p-okoth/" icon={Linkedin} label="LinkedIn" />
+              <DockItem mouseX={mouseX} href="https://x.com/frankie_okoth" icon={XIcon} label="X (Twitter)" />
+              <DockItem mouseX={mouseX} href="https://instagram.com/frankie_okoth/" icon={Instagram} label="Instagram" />
+            </div>
             </div>
 
             <div className="flex flex-col lg:flex-row items-center gap-12 mt-8 lg:mt-0">
