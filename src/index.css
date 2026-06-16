@@ -3,7 +3,9 @@
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Libre Bodoni", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --animate-shimmer: shimmer 1.5s infinite;
 }
 

@@ -80,7 +80,7 @@ export function Intro({ antigravity }: { antigravity: boolean }) {
       <motion.div
         animate={antigravity ? getFloatAnimation(true) : {}}
       >
-        <motion.h1 variants={item} className="text-5xl md:text-7xl font-light tracking-tight mb-8 leading-[1.1]">
+        <motion.h1 variants={item} className="font-sans text-5xl md:text-7xl font-light tracking-tight mb-8 leading-[1.1]">
           Frankie <br />
           <span className="font-medium text-white/90">Okoth.</span>
         </motion.h1>

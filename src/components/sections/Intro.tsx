@@ -67,12 +67,12 @@ export function Intro() {
             <div className="flex flex-col mb-6 -ml-1">
               
               {/* Word 1 */}
-              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tighter leading-[0.9] flex overflow-hidden pb-2">
+              <h1 className="font-sans text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tight leading-none flex overflow-hidden pt-4 pb-6 px-4 -mx-4">
                 {name1.map((char, index) => (
                   <motion.span 
                     key={index} 
                     variants={charVariant} 
-                    className="text-transparent bg-clip-text bg-gradient-to-br from-white to-white/70 inline-block origin-bottom"
+                    className="text-white/90 inline-block origin-bottom"
                   >
                     {char}
                   </motion.span>
@@ -80,12 +80,12 @@ export function Intro() {
               </h1>
               
               {/* Word 2 */}
-              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tighter leading-[0.9] flex overflow-hidden pb-2 -mt-2">
+              <h1 className="font-sans text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tight leading-none flex overflow-hidden pt-4 pb-6 px-4 -mx-4 -mt-8">
                 {name2.map((char, index) => (
                   <motion.span 
                     key={index} 
                     variants={charVariant} 
-                    className={`${char === '.' ? 'text-white' : 'text-transparent bg-clip-text bg-gradient-to-br from-white to-white/70'} inline-block origin-bottom`}
+                    className={`${char === '.' ? 'text-white' : 'text-white/90'} inline-block origin-bottom`}
                   >
                     {char}
                   </motion.span>
@@ -94,7 +94,7 @@ export function Intro() {
 
             </div>
             
-            <motion.div variants={fadeUp} className="flex flex-col gap-3 md:gap-4 mt-2">
+            <motion.div variants={fadeUp} className="flex flex-col gap-3 md:gap-4 -mt-6">
               <p className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight text-white/90">
                 Software Engineer.
               </p>
