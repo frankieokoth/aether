@@ -37,6 +37,7 @@ export function Navbar() {
   const handleNavClick = (id: string) => {
     setView(id);
     setIsOpen(false);
+    useAetherStore.getState().setIsNavigating(true);
     // Small delay so the exit animation plays before scroll
     setTimeout(() => {
       const target = document.getElementById(id.toLowerCase());
@@ -44,6 +45,9 @@ export function Navbar() {
       if (target && scrollContainer) {
         const targetTop = target.offsetTop - 80; // account for fixed header height
         scrollContainer.scrollTo({ top: targetTop, behavior: 'smooth' });
+        setTimeout(() => useAetherStore.getState().setIsNavigating(false), 1000);
+      } else {
+        useAetherStore.getState().setIsNavigating(false);
       }
     }, 300);
   };

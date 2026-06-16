@@ -33,6 +33,9 @@ export default function App() {
       // 1. Update nav blur state
       setIsScrolled(container.scrollTop > 50);
       
+      // Stop tracking sections if we are programmatically scrolling
+      if (useAetherStore.getState().isNavigating) return;
+
       // 2. Track active section (Trigger point is 30% down the screen)
       const triggerPoint = container.scrollTop + container.clientHeight * 0.3;
       
@@ -84,7 +87,9 @@ export default function App() {
           <button 
             onClick={() => {
               setView('HOME');
+              useAetherStore.getState().setIsNavigating(true);
               document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+              setTimeout(() => useAetherStore.getState().setIsNavigating(false), 1000);
             }}
             className={`text-xl font-light capitalize transition-colors duration-300 px-2 ${view === 'HOME' ? 'text-white' : 'text-white/50 hover:text-white/80'}`}
           >
