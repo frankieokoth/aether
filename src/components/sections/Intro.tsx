@@ -58,7 +58,7 @@ export function Intro() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="w-full max-w-7xl mx-auto px-6 md:px-16 relative z-10 -mt-20 md:-mt-32"
+        className="w-full max-w-7xl mx-auto px-6 md:px-16 relative z-10 -mt-24 md:-mt-40"
       >
         <div className="flex flex-col md:flex-row items-center md:items-center justify-center gap-16 md:gap-24 lg:gap-40 w-full">
           
