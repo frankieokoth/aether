@@ -71,7 +71,7 @@ export default function App() {
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
         className={`fixed top-0 left-0 w-full z-50 pointer-events-auto transition-colors duration-300 ${
         isScrolled 
-          ? 'bg-[#050014]/40 backdrop-blur-md border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]' 
+          ? 'bg-[#050014]/50 backdrop-blur-3xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]' 
           : 'bg-transparent border-transparent'
       }`}>
         
