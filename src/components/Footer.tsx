@@ -11,9 +11,27 @@ function LocalTimeDisplay() {
     return () => clearInterval(timer);
   }, []);
 
+  const hours = time.getHours().toString().padStart(2, '0');
+  const minutes = time.getMinutes().toString().padStart(2, '0');
+  const seconds = time.getSeconds().toString().padStart(2, '0');
+  
+  // Get a clean timezone string (e.g. "GMT+3" or "EAT")
+  const timeString = time.toLocaleTimeString('en-US', { timeZoneName: 'short' });
+  const timeZone = timeString.split(' ')[2] || '';
+
   return (
-    <div className="font-mono text-xl tracking-widest text-white/80 tabular-nums">
-      {time.toLocaleTimeString('en-US', { hour12: false, timeZoneName: 'short' })}
+    <div className="flex flex-col items-start md:items-end gap-1">
+      <div className="flex items-center gap-1.5 md:gap-2 font-mono tabular-nums select-none">
+        <span className="text-4xl md:text-6xl font-extralight tracking-tighter text-white">{hours}</span>
+        <span className="text-3xl md:text-5xl font-extralight text-white/20 animate-pulse pb-1 md:pb-2">:</span>
+        <span className="text-4xl md:text-6xl font-extralight tracking-tighter text-white">{minutes}</span>
+        <span className="text-3xl md:text-5xl font-extralight text-white/20 animate-pulse pb-1 md:pb-2 text-opacity-50">:</span>
+        <span className="text-4xl md:text-6xl font-extralight tracking-tighter text-[#A3E635] drop-shadow-[0_0_10px_rgba(163,230,53,0.3)]">{seconds}</span>
+      </div>
+      <div className="flex items-center gap-3 w-full justify-start md:justify-end pr-1 mt-1">
+        <span className="h-[1px] w-8 bg-white/10 hidden md:block" />
+        <span className="text-[10px] md:text-xs tracking-[0.4em] text-white/40 uppercase">{timeZone}</span>
+      </div>
     </div>
   );
 }
@@ -106,10 +124,6 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
             <div className="flex flex-col items-start md:items-end gap-2 text-left md:text-right">
               <span className="text-[10px] tracking-[0.3em] uppercase text-white/30 mb-2">Local Time</span>
               <LocalTimeDisplay />
-              <div className="flex items-center gap-2 mt-2 px-3 py-1.5 rounded-full border border-[#A3E635]/20 bg-[#A3E635]/5 backdrop-blur-md">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#A3E635] animate-pulse shadow-[0_0_8px_#A3E635]" />
-                <span className="text-[10px] tracking-widest uppercase text-[#A3E635]">Available for work</span>
-              </div>
             </div>
           </div>
 
