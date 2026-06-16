@@ -49,6 +49,7 @@ function DockItem({ mouseX, href, icon: Icon, label }: { mouseX: any, href: stri
   );
 }
 
+
 function XIcon(props: any) {
   return (
     <svg 
@@ -123,22 +124,20 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
                 onMouseLeave={() => mouseX.set(Infinity)}
                 className="flex items-center justify-center gap-3 h-[88px] px-4 w-max rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-3xl shadow-2xl"
               >
-              <DockItem mouseX={mouseX} href="https://github.com/frankieokoth" icon={Github} label="GitHub" />
-              <DockItem mouseX={mouseX} href="https://linkedin.com/in/franklin-p-okoth/" icon={Linkedin} label="LinkedIn" />
-              <DockItem mouseX={mouseX} href="https://x.com/frankie_okoth" icon={XIcon} label="X (Twitter)" />
-              <DockItem mouseX={mouseX} href="https://instagram.com/frankie_okoth/" icon={Instagram} label="Instagram" />
-            </div>
+                <DockItem mouseX={mouseX} href="https://github.com/frankieokoth" icon={Github} label="GitHub" />
+                <DockItem mouseX={mouseX} href="https://linkedin.com/in/franklin-p-okoth/" icon={Linkedin} label="LinkedIn" />
+                <DockItem mouseX={mouseX} href="https://x.com/frankie_okoth" icon={XIcon} label="X" />
+                <DockItem mouseX={mouseX} href="https://instagram.com/frankie_okoth/" icon={Instagram} label="Instagram" />
+              </div>
             </div>
 
-            <div className="flex flex-col lg:flex-row items-center gap-12 mt-8 lg:mt-0">
-              <div className="flex flex-col items-center lg:items-end gap-2">
-                <span className="text-3xl md:text-5xl lg:text-6xl font-light text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 tracking-tight">
-                  © {new Date().getFullYear()} Frankie Okoth.
-                </span>
-                <span className="text-xs md:text-sm font-light tracking-[0.3em] text-white/60 uppercase">
-                  All Rights Reserved
-                </span>
-              </div>
+            <div className="flex flex-col items-center lg:items-end gap-2">
+              <span className="text-3xl md:text-5xl lg:text-6xl font-light text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 tracking-tight">
+                © {new Date().getFullYear()} Frankie Okoth.
+              </span>
+              <span className="text-xs md:text-sm font-light tracking-[0.3em] text-white/60 uppercase">
+                All Rights Reserved
+              </span>
             </div>
           </div>
           
