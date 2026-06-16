@@ -131,11 +131,11 @@ export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefO
             </div>
 
             <div className="flex flex-col lg:flex-row items-center gap-12 mt-8 lg:mt-0">
-              <div className="flex flex-col items-center lg:items-end gap-1">
-                <span className="text-lg md:text-3xl font-light text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 tracking-wide">
+              <div className="flex flex-col items-center lg:items-end gap-2">
+                <span className="text-3xl md:text-5xl lg:text-6xl font-light text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 tracking-tight">
                   © {new Date().getFullYear()} Frankie Okoth.
                 </span>
-                <span className="text-[11px] font-light tracking-[0.25em] text-white/60 uppercase">
+                <span className="text-xs md:text-sm font-light tracking-[0.3em] text-white/60 uppercase">
                   All Rights Reserved
                 </span>
               </div>
