@@ -83,11 +83,10 @@ function XIcon(props: any) {
   );
 }
 
-export function Footer({ scrollContainerRef }: { scrollContainerRef?: React.RefObject<HTMLElement> }) {
+export function Footer() {
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    container: scrollContainerRef,
     offset: ['start end', 'end end']
   });
 

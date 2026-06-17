@@ -20,31 +20,27 @@ export default function App() {
   const setIsScrolled = useAetherStore((s) => s.setIsScrolled);
   const prevView = useAetherStore((s) => s.prevView);
 
-  const mainScrollContainerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ container: mainScrollContainerRef });
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
-    const container = mainScrollContainerRef.current;
-    if (!container) return;
-    
     const sections = ['home', 'about', 'work', 'stack', 'contact'];
     
     const handleScroll = () => {
       // 1. Update nav blur state
-      setIsScrolled(container.scrollTop > 50);
+      setIsScrolled(window.scrollY > 50);
       
       // Stop tracking sections if we are programmatically scrolling
       if (useAetherStore.getState().isNavigating) return;
 
       // 2. If near the bottom, force "CONTACT"
-      const distanceFromBottom = container.scrollHeight - container.scrollTop - container.clientHeight;
+      const distanceFromBottom = document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
       if (distanceFromBottom < 150) {
         setView('CONTACT');
         return;
       }
 
       // 3. Track active section (Trigger point is 30% down the screen)
-      const triggerPoint = container.scrollTop + container.clientHeight * 0.3;
+      const triggerPoint = window.scrollY + window.innerHeight * 0.3;
       
       // Loop backwards to find the deepest section we've scrolled past
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -56,11 +52,11 @@ export default function App() {
       }
     };
     
-    container.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
     // Run once to initialize
     handleScroll();
     
-    return () => container.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [setIsScrolled, setView]);
 
   return (
@@ -95,7 +91,7 @@ export default function App() {
             onClick={() => {
               setView('HOME');
               useAetherStore.getState().setIsNavigating(true);
-              document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+              window.scrollTo({ top: 0, behavior: 'smooth' });
               setTimeout(() => useAetherStore.getState().setIsNavigating(false), 1000);
             }}
             className={`text-xl font-light capitalize transition-colors duration-300 px-2 ${view === 'HOME' ? 'text-white' : 'text-white/50 hover:text-white/80'}`}
@@ -119,7 +115,7 @@ export default function App() {
         </div>
       </motion.header>
 
-      <main ref={mainScrollContainerRef} className="relative z-10 h-screen overflow-y-auto overflow-x-hidden scroll-smooth pointer-events-auto pt-16 md:pt-20" id="main-scroll-container">
+      <main className="relative z-10 w-full overflow-x-hidden pt-16 md:pt-20">
         <div className="pb-32">
           <section id="home" className="min-h-screen flex flex-col justify-center scroll-mt-20 relative pt-20">
             <Intro />
@@ -137,7 +133,7 @@ export default function App() {
             </section>
           </Suspense>
         </div>
-        <Footer scrollContainerRef={mainScrollContainerRef} />
+        <Footer />
       </main>
     </div>
   );

@@ -24,14 +24,12 @@ export function Navbar() {
 
   // Lock the actual scroll container when menu is open
   useEffect(() => {
-    const scrollContainer = document.getElementById('main-scroll-container');
-    if (!scrollContainer) return;
     if (isOpen) {
-      scrollContainer.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
     } else {
-      scrollContainer.style.overflow = '';
+      document.body.style.overflow = '';
     }
-    return () => { scrollContainer.style.overflow = ''; };
+    return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
   const handleNavClick = (id: string) => {
@@ -41,16 +39,15 @@ export function Navbar() {
     // Small delay so the exit animation plays before scroll
     setTimeout(() => {
       const target = document.getElementById(id.toLowerCase());
-      const scrollContainer = document.getElementById('main-scroll-container');
-      if (target && scrollContainer) {
+      if (target) {
         const targetTop = target.offsetTop - 80; // account for fixed header height
-        scrollContainer.scrollTo({ top: targetTop, behavior: 'smooth' });
+        window.scrollTo({ top: targetTop, behavior: 'smooth' });
         
         // Poll for scroll end instead of a fixed timeout
         let lastTop = -1;
         let settled = 0;
         const check = () => {
-          const currentTop = scrollContainer.scrollTop;
+          const currentTop = window.scrollY;
           if (currentTop === lastTop) {
             settled++;
             // Wait for 3 consecutive idle frames before releasing
