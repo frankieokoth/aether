@@ -60,7 +60,7 @@ export default function App() {
   }, [setIsScrolled, setView]);
 
   return (
-    <div className="relative min-h-screen bg-[#050014] text-white overflow-hidden font-sans selection:bg-[#8B5CF6] selection:text-white">
+    <div className="relative min-h-screen bg-[#050014] text-white overflow-x-hidden font-sans selection:bg-[#8B5CF6] selection:text-white">
       
       <Suspense fallback={<div className="fixed inset-0 bg-[#050014] z-0" />}>
         <Scene />
