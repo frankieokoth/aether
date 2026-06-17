@@ -126,10 +126,10 @@ export default function App() {
           </section>
           
           <Suspense fallback={null}>
-            <section id="about" className="pt-32 pb-16 scroll-mt-20">
+            <section id="about" className="py-32 scroll-mt-20">
               <About />
             </section>
-            <section id="work" className="pt-32 pb-16 scroll-mt-20">
+            <section id="work" className="py-32 scroll-mt-20">
               <ProjectGrid />
             </section>
             <section id="stack" className="pt-32 pb-32 scroll-mt-20">

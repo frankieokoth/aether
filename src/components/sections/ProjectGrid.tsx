@@ -143,7 +143,7 @@ export function ProjectGrid() {
       {/* Grid */}
       <div 
         ref={containerRef}
-        className="w-full flex flex-col gap-16 pb-12"
+        className="w-full flex flex-col gap-16"
       >
         {projects.map((p, i) => (
           <ProjectCard key={p.id} p={p} i={i} containerRef={containerRef} />
