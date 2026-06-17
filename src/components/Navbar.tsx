@@ -45,7 +45,26 @@ export function Navbar() {
       if (target && scrollContainer) {
         const targetTop = target.offsetTop - 80; // account for fixed header height
         scrollContainer.scrollTo({ top: targetTop, behavior: 'smooth' });
-        setTimeout(() => useAetherStore.getState().setIsNavigating(false), 1000);
+        
+        // Poll for scroll end instead of a fixed timeout
+        let lastTop = -1;
+        let settled = 0;
+        const check = () => {
+          const currentTop = scrollContainer.scrollTop;
+          if (currentTop === lastTop) {
+            settled++;
+            // Wait for 3 consecutive idle frames before releasing
+            if (settled >= 3) {
+              useAetherStore.getState().setIsNavigating(false);
+              return;
+            }
+          } else {
+            settled = 0;
+          }
+          lastTop = currentTop;
+          requestAnimationFrame(check);
+        };
+        requestAnimationFrame(check);
       } else {
         useAetherStore.getState().setIsNavigating(false);
       }

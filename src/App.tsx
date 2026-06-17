@@ -36,7 +36,14 @@ export default function App() {
       // Stop tracking sections if we are programmatically scrolling
       if (useAetherStore.getState().isNavigating) return;
 
-      // 2. Track active section (Trigger point is 30% down the screen)
+      // 2. If near the bottom, force "CONTACT"
+      const distanceFromBottom = container.scrollHeight - container.scrollTop - container.clientHeight;
+      if (distanceFromBottom < 150) {
+        setView('CONTACT');
+        return;
+      }
+
+      // 3. Track active section (Trigger point is 30% down the screen)
       const triggerPoint = container.scrollTop + container.clientHeight * 0.3;
       
       // Loop backwards to find the deepest section we've scrolled past
